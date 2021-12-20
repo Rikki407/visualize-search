@@ -1,0 +1,15 @@
+{
+  "name": "visualize-search",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "vite": "^2.7.2",
+    "vite-plugin-checker": "^0.3.4",
+    "vite-plugin-eslint": "^1.3.0"
+  }
+}
