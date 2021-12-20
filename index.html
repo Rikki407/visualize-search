@@ -7,6 +7,31 @@
         <title>Vite App</title>
     </head>
     <body>
+        <div class="switch">
+            <input
+                type="radio"
+                class="switch-input"
+                name="set"
+                value="start"
+                id="start"
+                checked
+            />
+            <label for="start" class="switch-label switch-label-off"
+                >Set Start</label
+            >
+            <input
+                type="radio"
+                class="switch-input"
+                name="set"
+                value="end"
+                id="end"
+            />
+            <label for="end" class="switch-label switch-label-on"
+                >Set Goal</label
+            >
+            <span class="switch-selection"></span>
+        </div>
+
         <script type="module" src="/main.js"></script>
     </body>
 </html>

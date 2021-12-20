@@ -1,35 +1,30 @@
+import colors from './colors';
 class Board {
     constructor(parent, cellSize) {
         this.parent = parent;
         this.cellSize = cellSize;
         this.grid = new Map();
-        this.grid.set('start', { row: -1, col: -1 });
-        this.grid.set('end', { row: -1, col: -1 });
-        this.table = document.createElement('table');
         window.addEventListener('resize', () => this.updateTable());
     }
     makeTable() {
-        this.rows = Math.round(window.innerHeight / this.cellSize) - 1;
+        this.rows = Math.ceil(window.innerHeight / this.cellSize) - 1;
         this.cols = Math.floor(window.innerWidth / this.cellSize);
         const table = document.createElement('table');
         table.setAttribute('cellspacing', 1);
         for (let i = 0; i < this.rows; i++) {
             const tr = document.createElement('tr');
             for (let j = 0; j < this.cols; j++) {
-                this.grid.set(`${i}-${j}`, this.grid.get(`${i}-${j}`) ?? false);
                 const td = document.createElement('td');
-                td.setAttribute(
-                    'style',
-                    `height:${this.cellSize - 2}px;
-                    width:${this.cellSize - 2}px;`
-                );
+                this.styleNormal(td);
+                td.addEventListener('click', () => this.onClick(i, j));
+                this.grid.set(`${i}-${j}`, {
+                    explored: false,
+                    td,
+                });
                 tr.appendChild(td);
             }
             table.appendChild(tr);
         }
-        this.grid.set('start', this.grid.get('start'));
-        this.grid.set('end', this.grid.get('end'));
-        this.grid = new Map(this.grid);
         this.table = table;
         this.parent.appendChild(this.table);
     }
@@ -41,13 +36,61 @@ class Board {
         }
     }
     explore({ row, col }) {
-        this.grid = new Map(this.grid.set(`${row}-${col}`, true));
+        this.grid.set(`${row}-${col}`, {
+            explored: true,
+            ...this.grid.get(`${row}-${col}`),
+        });
     }
-    setStart({ row, col }) {
-        this.grid = new Map(this.grid.set('start', { row, col }));
+    onClick(row, col, act = null) {
+        const action =
+            act ?? document.querySelector('.switch-input:checked').value;
+        const prev = this.grid.get(action);
+        if (prev) this.styleNormal(this.grid.get(`${prev.row}-${prev.col}`).td);
+        this.grid.set(action, { row, col });
+        const { td } = this.grid.get(`${row}-${col}`);
+        action === 'start' ? this.styleStart(td) : this.styleEnd(td);
     }
-    setEnd({ row, col }) {
-        this.grid = new Map(this.grid.set('end', { row, col }));
+    setStart(row, col) {
+        const prevStart = this.grid.get('start');
+        if (prevStart)
+            this.styleNormal(
+                this.grid.get(`${prevStart.row}-${prevStart.col}`).td
+            );
+
+        this.grid.set('start', { row, col });
+        this.styleStart(this.grid.get(`${row}-${col}`).td);
+    }
+    setEnd(row, col) {
+        const prevEnd = this.grid.get('end');
+        if (prevEnd)
+            this.styleNormal(this.grid.get(`${prevEnd.row}-${prevEnd.col}`).td);
+
+        this.grid.set('end', { row, col });
+        this.styleEnd(this.grid.get(`${row}-${col}`).td);
+    }
+    styleNormal(td) {
+        td.setAttribute(
+            'style',
+            `height:${this.cellSize - 2}px;
+            width:${this.cellSize - 2}px;
+            cursor: pointer;
+            border-radius: 18%;
+            background-color:${colors.NORMAL};`
+        );
+    }
+    styleStart(td) {
+        td.setAttribute(
+            'style',
+            `background-color: ${colors.START};
+            border-radius:38%;`
+        );
+    }
+    styleEnd(td) {
+        td.setAttribute(
+            'style',
+            `background-color: ${colors.END};
+            border-radius:38%;`
+        );
     }
     getNeighbors({ row, col }) {
         const neigbors = [];
