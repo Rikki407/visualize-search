@@ -1,6 +1,5 @@
-import './style.css'
+import './style.css';
+import Board from './src/Board';
 
-document.querySelector('#app').innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`
+const board = new Board(document.body, 20);
+board.makeTable();
