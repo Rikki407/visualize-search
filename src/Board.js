@@ -6,12 +6,7 @@ class Board {
         this.grid.set('start', { row: -1, col: -1 });
         this.grid.set('end', { row: -1, col: -1 });
         this.table = document.createElement('table');
-        window.addEventListener('resize', () => {
-            if (parent.contains(this.table)) {
-                this.removeTable();
-                this.makeTable();
-            }
-        });
+        window.addEventListener('resize', () => this.updateTable());
     }
     makeTable() {
         this.rows = Math.round(window.innerHeight / this.cellSize) - 1;
@@ -23,6 +18,11 @@ class Board {
             for (let j = 0; j < this.cols; j++) {
                 this.grid.set(`${i}-${j}`, this.grid.get(`${i}-${j}`) ?? false);
                 const td = document.createElement('td');
+                td.setAttribute(
+                    'style',
+                    `height:${this.cellSize - 2}px;
+                    width:${this.cellSize - 2}px;`
+                );
                 tr.appendChild(td);
             }
             table.appendChild(tr);
@@ -33,8 +33,12 @@ class Board {
         this.table = table;
         this.parent.appendChild(this.table);
     }
-    removeTable() {
-        this.parent.removeChild(this.table);
+    updateTable(cellSize = this.cellSize) {
+        this.cellSize = cellSize;
+        if (this.parent.contains(this.table)) {
+            this.parent.removeChild(this.table);
+            this.makeTable();
+        }
     }
     explore({ row, col }) {
         this.grid = new Map(this.grid.set(`${row}-${col}`, true));
