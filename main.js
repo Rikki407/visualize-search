@@ -1,6 +1,13 @@
 import './style.css';
+import './toggle.css';
+import './slider.css';
 import Board from './src/Board';
 
-const board = new Board(document.body, 25);
+const board = new Board(
+    document.getElementById('grid-container'),
+    document.querySelector('.toggle-state'),
+    document.querySelector('#speed-slider'),
+    document.querySelector('#size-slider'),
+);
 board.makeTable();
-document.getElementById('search-button').onclick = board.breadthFirstSearch;
+document.getElementById('search').onclick = board.breadthFirstSearch;

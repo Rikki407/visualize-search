@@ -7,31 +7,25 @@
         <title>Vite App</title>
     </head>
     <body>
-        <div class="switch">
-            <input
-                type="radio"
-                class="switch-input"
-                name="set"
-                value="start"
-                id="start"
-                checked
-            />
-            <label for="start" class="switch-label switch-label-off"
-                >Set Start</label
-            >
-            <input
-                type="radio"
-                class="switch-input"
-                name="set"
-                value="end"
-                id="end"
-            />
-            <label for="end" class="switch-label switch-label-on"
-                >Set Goal</label
-            >
-            <span class="switch-selection"></span>
+        <div id="action-container">
+            <label class="label">
+                <div class="label-text">Set Start</div>
+                <div class="toggle">
+                    <input
+                        class="toggle-state"
+                        type="checkbox"
+                        name="check"
+                        value="check"
+                    />
+                    <div class="indicator"></div>
+                </div>
+                <div class="label-text">Set Goal</div>
+            </label>
+            <div class="button" id="search"><span>Search</span></div>
+            <input type="range" id="speed-slider" />
+            <input type="range" id="size-slider" min="20" max="50" step="5" />
         </div>
-        <button id="search-button">Search</button>
+        <div id="grid-container"></div>
 
         <script type="module" src="/main.js"></script>
     </body>

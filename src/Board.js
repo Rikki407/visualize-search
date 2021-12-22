@@ -1,11 +1,21 @@
+import anime from 'animejs/lib/anime.es.js';
 import colors from './colors';
 class Board {
-    constructor(parent, cellSize) {
+    constructor(parent, toggle, speedSlider, sizeSlider) {
         this.parent = parent;
-        this.cellSize = cellSize;
+        this.toggle = toggle;
         this.grid = new Map();
+        this.cellSize = parseInt(speedSlider.value);
         this.breadthFirstSearch = this.breadthFirstSearch.bind(this);
         window.addEventListener('resize', () => this.updateTable());
+        speedSlider.addEventListener(
+            'input',
+            ({ target }) => (this.speed = parseInt(target.value))
+        );
+        sizeSlider.addEventListener('input', ({ target }) => {
+            this.cellSize = parseInt(target.value);
+            this.updateTable();
+        });
     }
     makeTable() {
         this.rows = Math.ceil(window.innerHeight / this.cellSize) - 1;
@@ -30,25 +40,21 @@ class Board {
         this.parent.appendChild(this.table);
     }
 
-    updateTable(cellSize = this.cellSize) {
-        this.cellSize = cellSize;
+    updateTable() {
         if (this.parent.contains(this.table)) {
             this.parent.removeChild(this.table);
             this.makeTable();
         }
     }
 
-    onClick(
-        row,
-        col,
-        action = document.querySelector('.switch-input:checked').value
-    ) {
+    onClick(row, col, action = !this.toggle.checked ? 'start' : 'goal') {
         const prev = this.grid.get(action);
         if (prev) this.styleNormal(this.grid.get(`${prev.row}-${prev.col}`).td);
         this.grid.set(action, { row, col });
         const { td } = this.grid.get(`${row}-${col}`);
-        action === 'start' ? this.styleStart(td) : this.styleEnd(td);
+        action === 'start' ? this.styleStart(td) : this.styleGoal(td);
     }
+
     explore({ row, col }) {
         const cell = this.grid.get(`${row}-${col}`);
         this.styleExplore(cell.td);
@@ -56,6 +62,7 @@ class Board {
             explored: true,
             ...cell,
         });
+        return new Promise((res) => setTimeout(res, this.speed));
     }
 
     styleNormal(td) {
@@ -75,19 +82,31 @@ class Board {
             border-radius:38%;`
         );
     }
-    styleEnd(td) {
+    styleGoal(td) {
         td.setAttribute(
             'style',
-            `background-color: ${colors.END};
+            `background-color: ${colors.GOAL};
             border-radius:38%;`
         );
     }
     styleExplore(td) {
-        td.setAttribute(
-            'style',
-            `background-color: ${colors.EXPLORED};
-        border-radius:38%;`
-        );
+        anime({
+            targets: td,
+            backgroundColor: [
+                { value: colors.EXPLORED[0] },
+                {
+                    value: colors.EXPLORED[1],
+                    easing: 'easeInOutSine',
+                    duration: 400,
+                },
+                {
+                    value: colors.EXPLORED[2],
+                    delay: 200,
+                    easing: 'easeInOutSine',
+                    duration: 400,
+                },
+            ],
+        });
     }
 
     getNeighbors({ row, col }) {
@@ -105,18 +124,19 @@ class Board {
         if (row > 0) neigbors.push({ row: row - 1, col: col });
         return neigbors;
     }
-    breadthFirstSearch() {
+
+    async breadthFirstSearch() {
         const start = this.grid.get('start');
-        const goal = this.grid.get('end');
+        const goal = this.grid.get('goal');
         const queue = [start];
         const reached = new Map([[JSON.stringify(start), true]]);
         while (queue.length !== 0) {
             const curr = queue.shift();
             for (const neighbor of this.getNeighbors(curr)) {
-                this.explore(neighbor);
                 if (JSON.stringify(neighbor) === JSON.stringify(goal))
                     return true;
                 if (!reached.has(JSON.stringify(neighbor))) {
+                    await this.explore(neighbor);
                     reached.set(JSON.stringify(neighbor), true);
                     queue.push(neighbor);
                 }
