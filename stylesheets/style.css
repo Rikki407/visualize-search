@@ -1,19 +1,24 @@
 html,
-body {
+body,
+main {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
     background-color: #f3f0f1;
-    display: grid;
-    place-items: center;
     font-family: 'IBM Plex Sans Condensed', sans-serif;
 }
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 #grid-container {
+    flex: 1;
     border-radius: 12px;
     width: 95%;
     padding: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 4px;
     box-shadow: 4px 4px 4px 0px #d1d9e6 inset, -4px -4px 4px 0px #ffffff inset,
         inset 0.8em 0.8em 5px -8px rgba(255, 255, 255, 0.4),
         inset -0.4em -0.4em 10px -3px rgba(0, 0, 0, 0.2);

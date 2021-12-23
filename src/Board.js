@@ -1,6 +1,7 @@
 import colors from './colors';
 class Board {
     constructor(parent, toggle, speedSlider, sizeSlider) {
+        this.flag = true;
         this.parent = parent;
         this.toggle = toggle;
         this.grid = new Map();
@@ -18,7 +19,14 @@ class Board {
         });
     }
     makeTable() {
-        this.rows = Math.ceil(window.innerHeight / this.cellSize) - 1;
+        this.rows = Math.round(this.parent.clientHeight / (this.cellSize - 1));
+        if (this.flag) {
+            // bug with height when renders for the first time
+            this.rows -= 2;
+            this.flag = false;
+        }
+
+        // alert(this.parent.clientHeight - this.rows * this.cellSize);
         this.cols = Math.floor(window.innerWidth / this.cellSize);
         const table = document.createElement('table');
         table.setAttribute('cellspacing', 1);
@@ -68,7 +76,7 @@ class Board {
     styleNormal(td) {
         td.setAttribute(
             'style',
-            `height:${this.cellSize - 2}px;
+            `height:${this.cellSize - 4}px;
             width:${this.cellSize - 2}px;
             cursor: pointer;
             background-color:${colors.NORMAL};`
@@ -77,7 +85,7 @@ class Board {
     styleStart(td) {
         td.setAttribute(
             'style',
-            `height:${this.cellSize - 2}px;
+            `height:${this.cellSize - 4}px;
             width:${this.cellSize - 2}px;
             cursor: pointer;background: ${colors.START};`
         );
@@ -88,7 +96,7 @@ class Board {
     styleExplore(td) {
         td.setAttribute(
             'style',
-            `height:${this.cellSize - 2}px;
+            `height:${this.cellSize - 4}px;
             width:${this.cellSize - 2}px;
             cursor: pointer;
             background-color: ${colors.EXPLORED};`
