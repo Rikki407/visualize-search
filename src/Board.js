@@ -5,7 +5,7 @@ class Board {
         this.parent = parent;
         this.toggle = toggle;
         this.grid = new Map();
-        this.cellSize = parseInt(speedSlider.value);
+        this.cellSize = parseInt(sizeSlider.value);
         this.breadthFirstSearch = this.breadthFirstSearch.bind(this);
         window.addEventListener('resize', () => this.updateTable());
         speedSlider.addEventListener(
@@ -71,23 +71,14 @@ class Board {
             `height:${this.cellSize - 2}px;
             width:${this.cellSize - 2}px;
             cursor: pointer;
-            border-radius: 18%;
-            background-color:${colors.NORMAL};`
+            background:${colors.NORMAL};`
         );
     }
     styleStart(td) {
-        td.setAttribute(
-            'style',
-            `background-color: ${colors.START};
-            border-radius:38%;`
-        );
+        td.setAttribute('style', `background: ${colors.START};`);
     }
     styleGoal(td) {
-        td.setAttribute(
-            'style',
-            `background-color: ${colors.GOAL};
-            border-radius:38%;`
-        );
+        td.setAttribute('style', `background: ${colors.GOAL};`);
     }
     styleExplore(td) {
         anime({

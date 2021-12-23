@@ -1,35 +1,7 @@
-html,
-body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #f3f0f1;
-    font-family: 'IBM Plex Sans Condensed', sans-serif;
-}
-#grid-container {
-    background-color: #14213d;
-}
-table {
-    width: 100%;
-}
-td:hover {
-    background-color: #b5179e !important;
-}
-
 /* Search button */
-#action-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f3f0f1;
-}
 #action-container .button {
     width: 100px;
     height: 40px;
-    background: #f3f0f1;
     background: #f3f0f1;
     margin: 25px 0;
     border-radius: 32px;
