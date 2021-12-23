@@ -13,7 +13,7 @@ input[type='range'] {
     /* To remove default styles appplied by webkit browsers */
     -webkit-appearance: none;
 
-    width: 24em;
+    width: 80%;
     background: transparent;
     position: relative;
 }

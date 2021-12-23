@@ -1,7 +1,6 @@
 import colors from './colors';
 class Board {
     constructor(parent, toggle, speedSlider, sizeSlider) {
-        this.flag = true;
         this.parent = parent;
         this.toggle = toggle;
         this.grid = new Map();
@@ -20,12 +19,6 @@ class Board {
     }
     makeTable() {
         this.rows = Math.round(this.parent.clientHeight / (this.cellSize - 1));
-        if (this.flag) {
-            // bug with height when renders for the first time
-            this.rows -= 2;
-            this.flag = false;
-        }
-
         // alert(this.parent.clientHeight - this.rows * this.cellSize);
         this.cols = Math.floor(window.innerWidth / this.cellSize);
         const table = document.createElement('table');
