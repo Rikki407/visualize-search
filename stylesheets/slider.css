@@ -1,3 +1,10 @@
+.slider-container {
+    font-weight: 300;
+    color: #394a56;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #speed-slider {
     direction: rtl;
 }

@@ -1,10 +1,10 @@
-import anime from 'animejs/lib/anime.es.js';
 import colors from './colors';
 class Board {
     constructor(parent, toggle, speedSlider, sizeSlider) {
         this.parent = parent;
         this.toggle = toggle;
         this.grid = new Map();
+        this.speed = parseInt(speedSlider.value);
         this.cellSize = parseInt(sizeSlider.value);
         this.breadthFirstSearch = this.breadthFirstSearch.bind(this);
         window.addEventListener('resize', () => this.updateTable());
@@ -71,33 +71,28 @@ class Board {
             `height:${this.cellSize - 2}px;
             width:${this.cellSize - 2}px;
             cursor: pointer;
-            background:${colors.NORMAL};`
+            background-color:${colors.NORMAL};`
         );
     }
     styleStart(td) {
-        td.setAttribute('style', `background: ${colors.START};`);
+        td.setAttribute(
+            'style',
+            `height:${this.cellSize - 2}px;
+            width:${this.cellSize - 2}px;
+            cursor: pointer;background: ${colors.START};`
+        );
     }
     styleGoal(td) {
         td.setAttribute('style', `background: ${colors.GOAL};`);
     }
     styleExplore(td) {
-        anime({
-            targets: td,
-            backgroundColor: [
-                { value: colors.EXPLORED[0] },
-                {
-                    value: colors.EXPLORED[1],
-                    easing: 'easeInOutSine',
-                    duration: 400,
-                },
-                {
-                    value: colors.EXPLORED[2],
-                    delay: 200,
-                    easing: 'easeInOutSine',
-                    duration: 400,
-                },
-            ],
-        });
+        td.setAttribute(
+            'style',
+            `height:${this.cellSize - 2}px;
+            width:${this.cellSize - 2}px;
+            cursor: pointer;
+            background-color: ${colors.EXPLORED};`
+        );
     }
 
     getNeighbors({ row, col }) {

@@ -13,7 +13,7 @@ body {
     background: #f3f0f1;
     border-radius: 12px;
     width: 95%;
-    padding: 16px;
+    padding: 8px;
     margin-bottom: 16px;
     box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
         6px 6px 10px rgba(0, 0, 0, 0.2);
@@ -30,22 +30,37 @@ table {
 
 td {
     border: 1px solid #a2b1ca;
-    background-color: linear-gradient(135deg, #d43c0b, #bf8a10);
+    -webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
 }
 table td:first-child {
     border-left: none;
 }
-
 table td:last-child {
     border-right: none;
 }
 table tr:first-child td {
     border-top: none;
 }
-
 table tr:last-child td {
     border-bottom: none;
 }
+
+table tr:first-child td:first-child {
+    border-top-left-radius: 8px;
+}
+table tr:first-child td:last-child {
+    border-top-right-radius: 8px;
+}
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+}
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+}
+
 td:hover {
-    background-color: #6f6cde !important;
+    background-color: #a29ff5 !important;
 }
