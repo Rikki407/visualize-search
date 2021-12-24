@@ -27,9 +27,7 @@ class Board {
     }
     makeTable() {
         this.rows = Math.round(this.parent.clientHeight / (this.cellSize - 1));
-        // alert(this.parent.clientHeight - this.rows * this.cellSize);
         this.cols = Math.floor(window.innerWidth / this.cellSize);
-        console.log('dev:', this.rows, this.cols);
         const table = document.createElement('table');
         table.setAttribute('cellspacing', 1);
         for (let i = 0; i < this.rows; i++) {
