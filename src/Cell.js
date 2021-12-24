@@ -8,7 +8,6 @@ class Cell {
 
     getNeighbors(maxRows, maxCols) {
         const neigbors = [];
-        console.log('this: ', this);
         if (this.row > 0 && this.col < maxCols - 1)
             neigbors.push(new Cell(this.row - 1, this.col + 1, this));
         if (this.col < maxCols - 1)
