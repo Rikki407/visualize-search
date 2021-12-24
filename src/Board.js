@@ -133,16 +133,11 @@ class Board {
         const frontier = [start];
         while (frontier.length !== 0) {
             const curr = frontier.pop();
-            await this.explore(curr);
             if (curr.isEqual(this.grid.get('goal'))) return true;
-            else if (!curr.isCycle()) {
-                for (const neighbor of curr.getNeighbors(
-                    this.rows,
-                    this.cols
-                )) {
+            await this.explore(curr);
+            if (!curr.isCycle())
+                for (const neighbor of curr.getNeighbors(this.rows, this.cols))
                     frontier.push(neighbor);
-                }
-            }
         }
         return false;
     }

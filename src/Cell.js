@@ -27,6 +27,11 @@ class Cell {
     }
 
     isCycle() {
+        let current = this;
+        while (current.parent !== null) {
+            if (this.isEqual(current.parent)) return true;
+            current = current.parent;
+        }
         return false;
     }
     isEqual(cell) {
