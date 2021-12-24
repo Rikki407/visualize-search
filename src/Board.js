@@ -26,13 +26,8 @@ class Board {
         this.grid.set(`${row}-${col}`, { ...values });
     }
     makeTable() {
-        const { height, width } = this.parent.getBoundingClientRect();
-        this.rows = Math.round(height / (this.cellSize - 1));
-        console.log(
-            this.parent.clientHeight,
-            this.parent.getBoundingClientRect().height
-        );
-        this.cols = Math.floor(width / this.cellSize);
+        this.rows = Math.round(this.parent.clientHeight / (this.cellSize - 1));
+        this.cols = Math.floor(window.innerWidth / this.cellSize);
         const table = document.createElement('table');
         table.setAttribute('cellspacing', 1);
         for (let i = 0; i < this.rows; i++) {
