@@ -9,19 +9,12 @@
     <body>
         <main>
             <div id="action-container">
-                <label class="label">
-                    <div class="label-text" style="margin-top: 2px;">Set Start</div>
-                    <div class="toggle">
-                        <input
-                            class="toggle-state"
-                            type="checkbox"
-                            name="check"
-                            value="check"
-                        />
-                        <div class="indicator"></div>
-                    </div>
-                    <div class="label-text" style="margin-top: 2px;">Set Goal</div>
-                </label>
+                <div class="toggle">
+                    <span>Start</span>
+                    <input type="checkbox" name="check" id="toggle" />
+                    <label for="toggle"> </label>
+                    <span>Goal</span>
+                </div>
                 <div id="speed" class="slider-container">
                     <div class="label-text">Speed</div>
                     <input type="range" id="speed-slider" />
@@ -37,11 +30,23 @@
                         value="25"
                     />
                 </div>
+                <div class="select">
+                    <select name="select" id="select">
+                        <option value="opt1">Breadth First</option>
+                        <option value="opt2">Depth First</option>
+                    </select>
+                    <div class="neu-button">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
                 <div class="button" id="search"><span>Search</span></div>
             </div>
             <div id="grid-container"></div>
         </main>
-
+        <script
+            src="https://kit.fontawesome.com/293c5afe2d.js"
+            crossorigin="anonymous"
+        ></script>
         <script type="module" src="/main.js"></script>
     </body>
 </html>

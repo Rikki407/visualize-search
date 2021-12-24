@@ -4,7 +4,7 @@ import Board from './src/Board';
 window.addEventListener('load', () => {
     const board = new Board(
         document.querySelector('#grid-container'),
-        document.querySelector('.toggle-state'),
+        document.querySelector('#toggle'),
         document.querySelector('#speed-slider'),
         document.querySelector('#size-slider')
     );

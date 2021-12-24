@@ -1,0 +1,194 @@
+:root {
+    --main-color: #fd8421;
+    --main-color-light: #f39b53;
+    --main-color-shadow: #d16a15;
+
+    /*--light Theme--*/
+
+    --hole-neutral: #aeaecb;
+    --hole-light: #cbcbdb;
+    --hole-shadow: #9595b0;
+
+    --l-neutral: #dedeed;
+    --l-light: #f1f1f7;
+    --l-shadow: #aaa4c4;
+    --l-object: #8f8fb5;
+
+    /*--Dark Theme--*/
+    /*
+	--hole-neutral: #aeaecb;
+	--hole-light: #cbcbdb;
+	--hole-shadow: #9595b0;
+
+	--l-neutral: #303040;
+	--l-light: #424255;
+	--l-shadow: #151322;
+	--l-object: #6d6d88;
+	*/
+}
+html,
+body,
+main {
+    margin: 0;
+    background: var(--l-neutral);
+    font-size: 1.05em;
+    color: var(--l-object);
+}
+.container {
+    width: calc(100vw - 200px);
+    height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    padding: 100px;
+}
+
+/*---Button---*/
+
+.neu-button {
+    width: 2.5em;
+    height: 2.5em;
+    margin: 1em;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.neu-button:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    filter: blur(1px);
+    position: absolute;
+    transition-duration: 300ms;
+    background: var(--l-neutral);
+    box-shadow: 7px 7px 15px var(--l-shadow), -7px -7px 15px var(--l-light);
+}
+.neu-button:hover:before {
+    filter: blur(1.5px);
+    box-shadow: -4px -4px 10px var(--l-shadow), 4px 4px 10px var(--l-light);
+}
+i {
+    font-size: 1.2em;
+    transition-duration: 300ms;
+    filter: blur(0.3px);
+    color: var(--l-object);
+}
+.neu-button:hover i {
+    color: var(--main-color) !important;
+}
+
+/*---toggle---*/
+.toggle {
+    display: flex;
+    align-items: center;
+}
+.toggle > [type='checkbox'] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+}
+.toggle > [type='checkbox']:checked + label,
+.toggle > [type='checkbox']:not(:checked) + label {
+    content: '';
+    width: 2.5em;
+    height: 1.5em;
+    margin: 2px 16px 0;
+    position: relative;
+    cursor: pointer;
+}
+.toggle > [type='checkbox']:checked + label:before,
+.toggle > [type='checkbox']:not(:checked) + label:before {
+    content: '';
+    width: 49px;
+    height: 24px;
+    filter: blur(0.6px);
+    position: absolute;
+    border-radius: 1em;
+    background: var(--hole-neutral);
+    box-shadow: 0 0 0 1.4px var(--l-light), 7px 7px 15px var(--l-shadow),
+        -7px -7px 15px var(--l-light), inset 3px 3px 13px var(--hole-shadow),
+        inset -3px -3px 10px var(--hole-light);
+    transition: all 150ms;
+}
+.toggle > [type='checkbox']:checked + label:before {
+    background: var(--main-color);
+    box-shadow: 0 0 0 1.4px var(--l-light), 7px 7px 15px var(--l-shadow),
+        -7px -7px 15px var(--l-light),
+        inset 3px 3px 13px var(--main-color-shadow),
+        inset -3px -3px 10px var(--main-color-light);
+}
+.toggle > [type='checkbox']:checked + label:after,
+.toggle > [type='checkbox']:not(:checked) + label:after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    margin: 2px 2px;
+    filter: blur(0.3px);
+    position: absolute;
+    border-radius: 1em;
+    background: var(--l-neutral);
+    left: 0;
+    box-shadow: inset 0 0 6px 1px var(--l-light),
+        inset -2px -2px 6px var(--l-shadow);
+    transition: all 200ms;
+}
+.toggle > [type='checkbox']:checked + label:after {
+    left: 25px;
+}
+
+/*---Select---*/
+
+.select {
+    height: 2.5em;
+    width: 12em;
+    margin: 1em;
+    position: relative;
+}
+.select:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 2em;
+    filter: blur(1px);
+    position: absolute;
+    background: var(--l-neutral);
+    box-shadow: 7px 7px 15px var(--l-shadow), -7px -7px 15px var(--l-light);
+}
+.select select {
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    padding: 0 0.6em;
+    background: transparent;
+    border: 0;
+    position: absolute;
+    font-size: 1em;
+    color: var(--l-object);
+    outline: none;
+}
+.select .neu-button {
+    width: 1.8em;
+    height: 1.8em;
+    margin: 0.4em;
+    right: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.select .neu-button i {
+    margin-top: 0.15em;
+    font-size: 1em;
+}
+.select:hover .neu-button:before,
+.select select:focus ~ .neu-button:before {
+    filter: blur(1.5px);
+    box-shadow: -4px -4px 10px var(--l-shadow), 4px 4px 10px var(--l-light);
+}
+.select:hover .neu-button i,
+.select select:focus ~ .neu-button i {
+    color: var(--main-color) !important;
+}
