@@ -1,3 +1,4 @@
+import Cell from './Cell';
 import colors from './colors';
 class Board {
     constructor(parent, toggle, speedSlider, sizeSlider) {
@@ -7,6 +8,7 @@ class Board {
         this.speed = parseInt(speedSlider.value);
         this.cellSize = parseInt(sizeSlider.value);
         this.breadthFirstSearch = this.breadthFirstSearch.bind(this);
+        this.depthFirstSearch = this.depthFirstSearch.bind(this);
         window.addEventListener('resize', () => this.updateTable());
         speedSlider.addEventListener(
             'input',
@@ -16,6 +18,12 @@ class Board {
             this.cellSize = parseInt(target.value);
             this.updateTable();
         });
+    }
+    getElement(row, col) {
+        return this.grid.get(`${row}-${col}`);
+    }
+    setElement(row, col, values) {
+        this.grid.set(`${row}-${col}`, { ...values });
     }
     makeTable() {
         this.rows = Math.round(this.parent.clientHeight / (this.cellSize - 1));
@@ -29,7 +37,7 @@ class Board {
                 const td = document.createElement('td');
                 this.styleNormal(td);
                 td.addEventListener('click', () => this.onClick(i, j));
-                this.grid.set(`${i}-${j}`, {
+                this.setElement(i, j, {
                     explored: false,
                     td,
                 });
@@ -50,18 +58,18 @@ class Board {
 
     onClick(row, col, action = !this.toggle.checked ? 'start' : 'goal') {
         const prev = this.grid.get(action);
-        if (prev) this.styleNormal(this.grid.get(`${prev.row}-${prev.col}`).td);
+        if (prev) this.styleNormal(this.getElement(prev.row, prev.col));
         this.grid.set(action, { row, col });
-        const { td } = this.grid.get(`${row}-${col}`);
+        const { td } = this.getElement(row, col);
         action === 'start' ? this.styleStart(td) : this.styleGoal(td);
     }
 
-    explore({ row, col }) {
-        const cell = this.grid.get(`${row}-${col}`);
-        this.styleExplore(cell.td);
-        this.grid.set(`${row}-${col}`, {
+    explore(cell) {
+        const element = this.getElement(cell.row, cell.col);
+        this.styleExplore(element.td);
+        this.setElement(cell.row, cell.col, {
             explored: true,
-            ...cell,
+            td: element.td,
         });
         return new Promise((res) => setTimeout(res, this.speed));
     }
@@ -96,36 +104,39 @@ class Board {
         );
     }
 
-    getNeighbors({ row, col }) {
-        const neigbors = [];
-        if (row > 0 && col < this.cols - 1)
-            neigbors.push({ row: row - 1, col: col + 1 });
-        if (col < this.cols - 1) neigbors.push({ row: row, col: col + 1 });
-        if (row < this.rows - 1 && col < this.cols - 1)
-            neigbors.push({ row: row + 1, col: col + 1 });
-        if (row < this.rows - 1) neigbors.push({ row: row + 1, col: col });
-        if (row < this.rows - 1 && col > 0)
-            neigbors.push({ row: row + 1, col: col - 1 });
-        if (col > 0) neigbors.push({ row: row, col: col - 1 });
-        if (row > 0 && col > 0) neigbors.push({ row: row - 1, col: col - 1 });
-        if (row > 0) neigbors.push({ row: row - 1, col: col });
-        return neigbors;
+    async breadthFirstSearch() {
+        const start = new Cell(
+            this.grid.get('start').row,
+            this.grid.get('start').col
+        );
+        const frontier = [start];
+        const reached = new Map([[start.repr, true]]);
+        while (frontier.length !== 0) {
+            const curr = frontier.shift();
+            for (const neighbor of curr.getNeighbors(this.rows, this.cols)) {
+                if (neighbor.isEqual(this.grid.get('goal'))) return true;
+                if (!reached.has(neighbor.repr)) {
+                    await this.explore(neighbor);
+                    reached.set(neighbor.repr, true);
+                    frontier.push(neighbor);
+                }
+            }
+        }
+        return false;
     }
 
-    async breadthFirstSearch() {
+    async depthFirstSearch() {
         const start = this.grid.get('start');
         const goal = this.grid.get('goal');
-        const queue = [start];
-        const reached = new Map([[JSON.stringify(start), true]]);
-        while (queue.length !== 0) {
-            const curr = queue.shift();
-            for (const neighbor of this.getNeighbors(curr)) {
-                if (JSON.stringify(neighbor) === JSON.stringify(goal))
-                    return true;
-                if (!reached.has(JSON.stringify(neighbor))) {
+        const frontier = [{ cell: start, parent: null }];
+        while (frontier.length !== 0) {
+            console.log('HERE');
+            const curr = frontier.pop();
+            if (JSON.stringify(curr) === JSON.stringify(goal)) return true;
+            else if (!this.isCycle(curr)) {
+                for (const neighbor of this.getNeighbors(curr)) {
                     await this.explore(neighbor);
-                    reached.set(JSON.stringify(neighbor), true);
-                    queue.push(neighbor);
+                    frontier.push({ cell: neighbor, parent });
                 }
             }
         }
