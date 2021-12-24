@@ -1,6 +1,7 @@
 import './stylesheets';
 import Board from './src/Board';
 
+
 const board = new Board(
     document.querySelector('#grid-container'),
     document.querySelector('.toggle-state'),
