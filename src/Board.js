@@ -58,7 +58,7 @@ class Board {
 
     onClick(row, col, action = !this.toggle.checked ? 'start' : 'goal') {
         const prev = this.grid.get(action);
-        if (prev) this.styleNormal(this.getElement(prev.row, prev.col));
+        if (prev) this.styleNormal(this.getElement(prev.row, prev.col).td);
         this.grid.set(action, { row, col });
         const { td } = this.getElement(row, col);
         action === 'start' ? this.styleStart(td) : this.styleGoal(td);
@@ -126,17 +126,21 @@ class Board {
     }
 
     async depthFirstSearch() {
-        const start = this.grid.get('start');
-        const goal = this.grid.get('goal');
-        const frontier = [{ cell: start, parent: null }];
+        const start = new Cell(
+            this.grid.get('start').row,
+            this.grid.get('start').col
+        );
+        const frontier = [start];
         while (frontier.length !== 0) {
-            console.log('HERE');
             const curr = frontier.pop();
-            if (JSON.stringify(curr) === JSON.stringify(goal)) return true;
-            else if (!this.isCycle(curr)) {
-                for (const neighbor of this.getNeighbors(curr)) {
-                    await this.explore(neighbor);
-                    frontier.push({ cell: neighbor, parent });
+            await this.explore(curr);
+            if (curr.isEqual(this.grid.get('goal'))) return true;
+            else if (!curr.isCycle()) {
+                for (const neighbor of curr.getNeighbors(
+                    this.rows,
+                    this.cols
+                )) {
+                    frontier.push(neighbor);
                 }
             }
         }

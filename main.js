@@ -8,4 +8,4 @@ const board = new Board(
     document.querySelector('#size-slider')
 );
 board.makeTable();
-document.getElementById('search').onclick = board.breadthFirstSearch;
+document.getElementById('search').onclick = board.depthFirstSearch;
