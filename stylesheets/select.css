@@ -60,8 +60,8 @@ main {
     content: '';
     width: 100%;
     height: 100%;
-    border-radius: 50%;
-    filter: blur(1px);
+    border-radius: 32px;
+    filter: blur(1.5px);
     position: absolute;
     transition-duration: 300ms;
     background: var(--l-neutral);
@@ -71,13 +71,15 @@ main {
     filter: blur(1.5px);
     box-shadow: -4px -4px 10px var(--l-shadow), 4px 4px 10px var(--l-light);
 }
-i {
-    font-size: 1.2em;
+.neu-button > * {
     transition-duration: 300ms;
     filter: blur(0.3px);
     color: var(--l-object);
 }
 .neu-button:hover i {
+    color: var(--main-color) !important;
+}
+.neu-button:active > * {
     color: var(--main-color) !important;
 }
 

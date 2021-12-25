@@ -6,7 +6,6 @@ main {
     margin: 0;
     padding: 0;
     padding-bottom: 12px;
-    background-color: #f3f0f1;
     font-family: 'IBM Plex Sans Condensed', sans-serif;
 }
 main {
@@ -20,9 +19,9 @@ main {
     border-radius: 12px;
     width: 95%;
     padding: 8px;
-    box-shadow: 4px 4px 4px 0px #d1d9e6 inset, -4px -4px 4px 0px #ffffff inset,
-        inset 0.8em 0.8em 5px -8px rgba(255, 255, 255, 0.4),
-        inset -0.4em -0.4em 10px -3px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 4px 4px 16px -7px var(--l-light),
+        inset -7px -7px 9px -6px var(--l-shadow),
+        6px 6px 12px 1px var(--l-shadow);
 }
 #action-container {
     margin: 20px 0;
