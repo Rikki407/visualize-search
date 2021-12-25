@@ -9,5 +9,10 @@ window.addEventListener('load', () => {
         document.querySelector('#size-slider')
     );
     board.makeTable();
-    document.getElementById('search').onclick = () => board.depthFirstSearch();
+    document.getElementById('search').onclick = () =>
+        board.breadthFirstSearch();
+
+    document.getElementById('select').onchange = ({ target }) => {
+        document.getElementById('search').onclick = () => board[target.value]();
+    };
 });
