@@ -9,6 +9,8 @@ class Board {
         this.cellSize = parseInt(sizeSlider.value);
         this.breadthFirstSearch = this.breadthFirstSearch.bind(this);
         this.depthFirstSearch = this.depthFirstSearch.bind(this);
+        this.iterativeDeepeningSearch =
+            this.iterativeDeepeningSearch.bind(this);
         window.addEventListener('resize', () => this.updateTable());
         speedSlider.addEventListener(
             'input',
@@ -124,7 +126,7 @@ class Board {
         return false;
     }
 
-    async depthFirstSearch() {
+    async depthFirstSearch(limit = Infinity) {
         const start = new Cell(
             this.grid.get('start').row,
             this.grid.get('start').col
@@ -134,11 +136,20 @@ class Board {
             const curr = frontier.pop();
             if (curr.isEqual(this.grid.get('goal'))) return true;
             if (!curr.isEqual(start)) await this.explore(curr);
-            if (!curr.isCycle())
+            if (curr.depth <= limit && !curr.isCycle())
                 for (const neighbor of curr.getNeighbors(this.rows, this.cols))
                     frontier.push(neighbor);
         }
         return false;
+    }
+
+    async iterativeDeepeningSearch() {
+        let limit = 0;
+        let result = false;
+        while (!result) {
+            limit++;
+            result = await this.depthFirstSearch(limit);
+        }
     }
 }
 

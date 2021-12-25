@@ -4,6 +4,7 @@ class Cell {
         this.col = col;
         this.repr = `row:${row} - col:${col}`;
         this.parent = parent;
+        this.depth = parent ? parent.depth + 1 : 0;
     }
 
     getNeighbors(maxRows, maxCols) {
