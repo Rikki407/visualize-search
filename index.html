@@ -15,20 +15,6 @@
                     <label for="toggle"> </label>
                     <span>Goal</span>
                 </div>
-                <div id="speed" class="slider-container">
-                    <div class="label-text">Speed</div>
-                    <input type="range" id="speed-slider" />
-                </div>
-                <div id="size" class="slider-container">
-                    <div class="label-text">Grid Size</div>
-                    <input
-                        type="range"
-                        id="size-slider"
-                        min="20"
-                        max="50"
-                        value="25"
-                    />
-                </div>
                 <div class="select">
                     <select name="select" id="select">
                         <option value="breadthFirstSearch">
@@ -43,6 +29,23 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                 </div>
+                <div id="speed" class="slider-container">
+                    <div class="label-text">Speed</div>
+                    <input type="range" class="neu-input" id="speed-slider" />
+                </div>
+                <div id="size" class="slider-container">
+                    <div class="label-text">Grid Size</div>
+                    <input
+                        class="neu-input"
+                        type="range"
+                        id="size-slider"
+                        min="20"
+                        max="50"
+                        value="25"
+                        style="z-index: 10"
+                    />
+                </div>
+
                 <div class="neu-button" style="width: 6em" id="search">
                     <span>Search</span>
                 </div>

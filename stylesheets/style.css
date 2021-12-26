@@ -27,12 +27,15 @@ main {
     margin: 20px 0;
     display: grid;
     width: 95%;
-    grid-template-areas: 'toggle speed size search ';
+    grid-template-areas: 'toggle  speed size select search ';
     gap: 12px;
-    grid-template-columns: 0.9fr 1.5fr 1.5fr 1.4fr;
+    grid-template-columns: 1fr 3fr 3fr 2fr 2fr;
 }
 #action-container > .label {
     grid-area: toggle;
+}
+#action-container > .select {
+    grid-area: select;
 }
 #action-container > #speed {
     grid-area: speed;

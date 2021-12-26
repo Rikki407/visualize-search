@@ -1,4 +1,5 @@
-import './stylesheets';
+import './stylesheets/style.css';
+import './stylesheets/neumorphic.css'
 import Board from './src/Board';
 
 window.addEventListener('load', () => {

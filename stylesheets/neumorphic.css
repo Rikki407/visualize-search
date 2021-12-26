@@ -2,6 +2,7 @@
     --main-color: #fd8421;
     --main-color-light: #f39b53;
     --main-color-shadow: #d16a15;
+    --accent-color: #79e3b6;
 
     /*--light Theme--*/
 
@@ -73,6 +74,12 @@ main {
 }
 .neu-button > * {
     transition-duration: 300ms;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
     filter: blur(0.3px);
     color: var(--l-object);
 }
@@ -81,6 +88,80 @@ main {
 }
 .neu-button:active > * {
     color: var(--main-color) !important;
+}
+
+/* ---input range--- */
+.slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slider-container > .label-text {
+    margin: 0 20px;
+}
+#speed-slider {
+    direction: rtl;
+}
+.neu-input {
+    position: relative;
+    height: 30px;
+    flex: 1;
+}
+.neu-input:before {
+    cursor: pointer;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    left: 0px;
+    border-radius: 26px;
+    filter: blur(1.5px);
+    box-shadow: -4px -4px 10px var(--l-shadow), 4px 4px 10px var(--l-light);
+}
+
+input[type='range'] {
+    /* To remove default styles appplied by webkit browsers */
+    -webkit-appearance: none;
+    margin: 0;
+    width: 100%;
+    background: transparent;
+    position: relative;
+}
+input[type='range']:focus {
+    /* To remove default (mostly blue) outline appplied by browsers on :focus */
+    outline: 0;
+}
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    margin: 4px 0;
+    background: hsl(27, 98%, 50%);
+    border-radius: 100%;
+    box-shadow: inset 0.8em 0.8em 5px -8px rgba(255, 255, 255, 0.4),
+        inset -0.4em -0.4em 10px -3px rgba(0, 0, 0, 0.2),
+        0.7em 0.5em 7px -0.5em rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+/*All the same stuff for firefox */
+input[type='range']::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    margin: 4px 0;
+    background: hsl(27, 98%, 50%);
+    border-radius: 100%;
+    box-shadow: inset 0.8em 0.8em 5px -8px rgba(255, 255, 255, 0.4),
+        inset -0.4em -0.4em 10px -3px rgba(0, 0, 0, 0.2),
+        0.7em 0.5em 7px -0.5em rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    border: 0;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+    padding: 2px 6px;
+}
+input[type='range']::-moz-range-track {
+    padding: 2px 6px;
 }
 
 /*---toggle---*/
