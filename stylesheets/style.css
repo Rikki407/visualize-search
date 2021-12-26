@@ -27,9 +27,6 @@ main {
     margin: 20px 0;
     display: grid;
     width: 95%;
-    grid-template-areas: 'toggle  speed size select search ';
-    gap: 12px;
-    grid-template-columns: 1fr 3fr 3fr 2fr 2fr;
 }
 #action-container > .label {
     grid-area: toggle;
@@ -89,3 +86,56 @@ table tr:last-child td:last-child {
 td:hover {
     background-color: #a29ff5 !important;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+       #action-container {
+        grid-template-areas:
+            'toggle search'
+            'speed speed'
+            'size size'
+            'select select';
+        gap: 12px;
+        /* grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 3fr 3fr; */
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    #action-container {
+        grid-template-areas:
+            'toggle search'
+            'speed size'
+            'select select';
+        gap: 12px;
+        /* grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 3fr 3fr; */
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    #action-container {
+        grid-template-areas:
+            'toggle select search'
+            'speed size size';
+        gap: 12px;
+        /* grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 3fr 3fr; */
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 1200px) {
+    #action-container {
+        grid-template-areas: 'toggle speed size select search ';
+        gap: 12px;
+        grid-template-columns: 1fr 3fr 3fr 2fr 2fr;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up)
+@media only screen and (min-width: 1200px) {
+    ...;
+} */
