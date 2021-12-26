@@ -33,6 +33,7 @@ main {
 }
 #action-container > .select {
     grid-area: select;
+    justify-self: center;
 }
 #action-container > #speed {
     grid-area: speed;
@@ -101,25 +102,13 @@ td:hover {
     }
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    #action-container {
-        grid-template-areas:
-            'toggle search'
-            'speed size'
-            'select select';
-        gap: 12px;
-        /* grid-template-rows: 1fr 1fr;
-        grid-template-columns: 1fr 3fr 3fr; */
-    }
-}
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 560px) {
     #action-container {
         grid-template-areas:
-            'toggle select search'
-            'speed size size';
+            'toggle select select search'
+            'speed speed size size';
         gap: 12px;
         /* grid-template-rows: 1fr 1fr;
         grid-template-columns: 1fr 3fr 3fr; */
@@ -130,8 +119,8 @@ td:hover {
 @media only screen and (min-width: 1200px) {
     #action-container {
         grid-template-areas: 'toggle speed size select search ';
-        gap: 12px;
-        grid-template-columns: 1fr 3fr 3fr 2fr 2fr;
+        gap: 20px;
+        grid-template-columns: 1fr 3fr 3.2fr 3fr 2fr;
     }
 }
 

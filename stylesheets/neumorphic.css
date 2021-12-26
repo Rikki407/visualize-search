@@ -228,7 +228,7 @@ input[type='range']::-moz-range-track {
 
 .select {
     height: 2.5em;
-    width: 12em;
+    width: 98%;
     margin: 1em;
     position: relative;
 }
