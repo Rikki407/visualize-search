@@ -9,23 +9,25 @@
     --hole-neutral: #aeaecb;
     --hole-light: #cbcbdb;
     --hole-shadow: #9595b0;
-
+    --thumb-shine: rgba(255, 255, 255, 0.4);
+    
     --l-neutral: #dedeed;
     --l-light: #f1f1f7;
     --l-shadow: #aaa4c4;
     --l-object: #8f8fb5;
-
+    
     /*--Dark Theme--*/
-    /*
-	--hole-neutral: #aeaecb;
+    
+	/* --hole-neutral: #aeaecb;
 	--hole-light: #cbcbdb;
 	--hole-shadow: #9595b0;
-
+    --thumb-shine:rgba(190, 177, 177, 0.4);
+    
 	--l-neutral: #303040;
 	--l-light: #424255;
 	--l-shadow: #151322;
-	--l-object: #6d6d88;
-	*/
+	--l-object: #6d6d88; */
+	
 }
 html,
 body,
@@ -136,9 +138,9 @@ input[type='range']::-webkit-slider-thumb {
     width: 22px;
     height: 22px;
     margin: 4px 0;
-    background: hsl(27, 98%, 50%);
+    background: var(--main-color);
     border-radius: 100%;
-    box-shadow: inset 0.8em 0.8em 5px -8px rgba(255, 255, 255, 0.4),
+    box-shadow: inset 0.8em 0.8em 5px -8px var(--thumb-shine),
         inset -0.4em -0.4em 10px -3px rgba(0, 0, 0, 0.2),
         0.7em 0.5em 7px -0.5em rgba(0, 0, 0, 0.4);
     cursor: pointer;
@@ -148,9 +150,9 @@ input[type='range']::-moz-range-thumb {
     width: 22px;
     height: 22px;
     margin: 4px 0;
-    background: hsl(27, 98%, 50%);
+    background: var(--main-color);
     border-radius: 100%;
-    box-shadow: inset 0.8em 0.8em 5px -8px rgba(255, 255, 255, 0.4),
+    box-shadow: inset 0.8em 0.8em 5px -8px var(--thumb-shine),
         inset -0.4em -0.4em 10px -3px rgba(0, 0, 0, 0.2),
         0.7em 0.5em 7px -0.5em rgba(0, 0, 0, 0.4);
     cursor: pointer;
