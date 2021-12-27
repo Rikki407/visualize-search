@@ -1,6 +1,6 @@
 import Cell from './Cell';
 import colors from './colors';
-import fade from './utility';
+import { fade, PriorityQueue } from './utility';
 class Board {
     constructor(parent, toggle, speedSlider, sizeSlider) {
         this.parent = parent;
@@ -12,6 +12,7 @@ class Board {
         this.depthFirstSearch = this.depthFirstSearch.bind(this);
         this.iterativeDeepeningSearch =
             this.iterativeDeepeningSearch.bind(this);
+        this.aStartSearch = this.aStartSearch.bind(this);
         window.addEventListener('resize', () => this.updateTable());
         speedSlider.addEventListener(
             'input',
@@ -154,6 +155,28 @@ class Board {
             limit++;
             result = await this.depthFirstSearch(limit);
         }
+    }
+
+    async aStartSearch() {
+        const start = new Cell(
+            this.grid.get('start').row,
+            this.grid.get('start').col
+        );
+        const frontier = new PriorityQueue((a, b) => a.f > b.f);
+        frontier.push(start);
+        const reached = new Map([[start.repr, true]]);
+        while (!frontier.isEmpty()) {
+            const curr = frontier.pop();
+            for (const neighbor of curr.getNeighbors(this.rows, this.cols)) {
+                if (neighbor.isEqual(this.grid.get('goal'))) return true;
+                if (!reached.has(neighbor.repr)) {
+                    await this.explore(neighbor);
+                    reached.set(neighbor.repr, true);
+                    frontier.push(neighbor);
+                }
+            }
+        }
+        return false;
     }
 }
 

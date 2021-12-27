@@ -262,6 +262,7 @@ input[type='range']::-moz-range-track {
     font-size: 1em;
     color: var(--l-object);
     outline: none;
+    cursor: pointer !important;
 }
 .select .neu-button {
     width: 1.8em;
