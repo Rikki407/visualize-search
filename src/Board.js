@@ -1,5 +1,6 @@
 import Cell from './Cell';
 import colors from './colors';
+import fade from './utility';
 class Board {
     constructor(parent, toggle, speedSlider, sizeSlider) {
         this.parent = parent;
@@ -103,6 +104,9 @@ class Board {
             cursor: pointer;
             background-color: ${colors.EXPLORED};`
         );
+        const startColor = { r: 255, g: 0, b: 0 }; // red
+        const endColor = { r: 0, g: 128, b: 128 }; // dark turquoise
+        fade(td, 'background-color', startColor, endColor, 1000);
     }
 
     async breadthFirstSearch() {
