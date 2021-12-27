@@ -3,23 +3,22 @@ import './stylesheets/neumorphic.css';
 import Board from './src/Board';
 
 const rootCSSKeys = [
-    { '--main-color': { light: '#fd8421', dark: '#fd8421' } },
-    { '--main-color-light': { light: '#f39b53', dark: '#f39b53' } },
-    { '--main-color-shadow': { light: '#d16a15', dark: '#d16a15' } },
-    { '--accent-color': { light: '#79e3b6', dark: '#79e3b6' } },
-    { '--hole-neutral': { light: '#aeaecb', dark: '#aeaecb' } },
-    { '--hole-light': { light: '#cbcbdb', dark: '#cbcbdb' } },
-    { '--hole-shadow': { light: '#9595b0', dark: '#9595b0' } },
+    { key: '--main-color', light: '#fd8421', dark: '#79e3b6' },
+    { key: '--main-color-light', light: '#f39b53', dark: '#a8f7d6' },
+    { key: '--main-color-shadow', light: '#d16a15', dark: '#5cb891' },
+    { key: '--accent-color', light: '#fd8421', dark: '#79e3b6' },
+    { key: '--hole-neutral', light: '#aeaecb', dark: '#aeaecb' },
+    { key: '--hole-light', light: '#cbcbdb', dark: '#cbcbdb' },
+    { key: '--hole-shadow', light: '#9595b0', dark: '#9595b0' },
     {
-        '--thumb-shine': {
-            light: 'rgba(255, 255, 255, 0.4)',
-            dark: 'rgba(190, 177, 177, 0.4)',
-        },
+        key: '--thumb-shine',
+        light: 'rgba(255, 255, 255, 0.4)',
+        dark: 'rgba(190, 177, 177, 0.4)',
     },
-    { '--l-neutral': { light: '#dedeed', dark: '#303040' } },
-    { '--l-light': { light: '#f1f1f7', dark: '#424255' } },
-    { '--l-shadow': { light: '#aaa4c4', dark: '#151322' } },
-    { '--l-object': { light: '#8f8fb5', dark: '#6d6d88' } },
+    { key: '--l-neutral', light: '#dedeed', dark: '#303040' },
+    { key: '--l-light', light: '#f1f1f7', dark: '#424255' },
+    { key: '--l-shadow', light: '#aaa4c4', dark: '#151322' },
+    { key: '--l-object', light: '#8f8fb5', dark: '#6d6d88' },
 ];
 window.addEventListener('load', () => {
     const board = new Board(
@@ -35,5 +34,18 @@ window.addEventListener('load', () => {
     document.getElementById('select').onchange = ({ target }) => {
         document.getElementById('search').onclick = () => board[target.value]();
     };
-    document.documentElement.style.setProperty('--hole-neutral', '#79e3b6');
 });
+let lightTheme = true;
+const themeButton = document.getElementById('theme');
+themeButton.onclick = () => {
+    lightTheme = !lightTheme;
+    console.log(themeButton.firstElementChild)
+    themeButton.firstElementChild.classList.toggle('fa-sun')
+    themeButton.firstElementChild.classList.toggle('fa-moon')
+    rootCSSKeys.forEach(({ key, light, dark }) =>
+        document.documentElement.style.setProperty(
+            key,
+            lightTheme ? light : dark
+        )
+    );
+};

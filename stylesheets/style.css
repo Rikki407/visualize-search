@@ -41,6 +41,9 @@ main {
 #action-container > #size {
     grid-area: size;
 }
+#action-container > #theme {
+    grid-area: theme;
+}
 #action-container > #search {
     grid-area: search;
     justify-self: end;
@@ -92,10 +95,10 @@ td:hover {
 @media only screen and (max-width: 600px) {
        #action-container {
         grid-template-areas:
-            'toggle search'
-            'speed speed'
-            'size size'
-            'select select';
+            'toggle theme search'
+            'speed speed speed'
+            'size size size'
+            'select select select';
         gap: 12px;
         /* grid-template-rows: 1fr 1fr;
         grid-template-columns: 1fr 3fr 3fr; */
@@ -107,20 +110,20 @@ td:hover {
 @media only screen and (min-width: 560px) {
     #action-container {
         grid-template-areas:
-            'toggle select select search'
+            'toggle select theme search'
             'speed speed size size';
         gap: 12px;
-        /* grid-template-rows: 1fr 1fr;
-        grid-template-columns: 1fr 3fr 3fr; */
+        /* grid-template-rows: 1fr 1fr;*/
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 1200px) {
     #action-container {
-        grid-template-areas: 'toggle speed size select search ';
+        grid-template-areas: 'toggle speed size select theme search ';
         gap: 20px;
-        grid-template-columns: 1fr 3fr 3.2fr 3fr 2fr;
+        grid-template-columns: 1fr 3fr 3.2fr 2fr 1fr 2fr;
     }
 }
 
