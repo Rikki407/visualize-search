@@ -13,6 +13,7 @@ main {
     align-items: center;
 }
 #grid-container {
+    background: var(--l-neutral);
     display: block;
     flex: 1;
     border-radius: 12px;
@@ -24,7 +25,7 @@ main {
         6px 6px 12px 1px var(--l-shadow);
 }
 #action-container {
-    margin: 12px 0;
+    margin: 16px 0;
     display: grid;
     width: 95%;
 }

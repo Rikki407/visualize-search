@@ -1,23 +1,3 @@
-const lerp = (a, b, u) => (1 - u) * a + u * b;
-
-const fade = (element, property, start, end, duration) => {
-    var interval = 10;
-    var steps = duration / interval;
-    var step_u = 1.0 / steps;
-    var u = 0.0;
-    var theInterval = setInterval(function () {
-        if (u >= 1.0) {
-            clearInterval(theInterval);
-        }
-        var r = parseInt(lerp(start.r, end.r, u));
-        var g = parseInt(lerp(start.g, end.g, u));
-        var b = parseInt(lerp(start.b, end.b, u));
-        var colorname = 'rgb(' + r + ',' + g + ',' + b + ')';
-        element.style.setProperty(property, colorname);
-        u += step_u;
-    }, interval);
-};
-
 const top = 0;
 const parent = (i) => ((i + 1) >>> 1) - 1;
 const left = (i) => (i << 1) + 1;
@@ -90,4 +70,4 @@ class PriorityQueue {
     }
 }
 
-export { fade, PriorityQueue };
+export { PriorityQueue };

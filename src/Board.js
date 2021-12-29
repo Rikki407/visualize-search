@@ -1,6 +1,8 @@
 import Cell from './Cell';
 import colors from './colors';
 import { PriorityQueue } from './utility';
+
+const lerp = (a, b, u) => (1 - u) * a + u * b;
 class Board {
     constructor(parent, toggle, speedSlider, sizeSlider) {
         this.parent = parent;
@@ -8,6 +10,7 @@ class Board {
         this.grid = new Map();
         this.start = null;
         this.end = null;
+        this.elements = [];
         this.speed = parseInt(speedSlider.value);
         this.cellSize = parseInt(sizeSlider.value);
         this.breadthFirstSearch = this.breadthFirstSearch.bind(this);
@@ -24,6 +27,9 @@ class Board {
             this.cellSize = parseInt(target.value);
             this.updateTable();
         });
+        const startColor = { r: 255, g: 0, b: 0 }; // red
+        const endColor = { r: 0, g: 128, b: 128 }; // dark turquoise
+        this.fade('background-color', startColor, endColor, 1000);
     }
     getElement(cell) {
         return this.grid.get(`${cell.row}-${cell.col}`);
@@ -98,14 +104,34 @@ class Board {
     styleGoal(td) {
         td.setAttribute('style', `background: ${colors.GOAL};`);
     }
-    styleExplore(td, explored) {
+    styleExplore(td) {
         td.setAttribute(
             'style',
             `height:${this.cellSize - 4}px;
             width:${this.cellSize - 2}px;
-            cursor: pointer;
-            background-color: ${colors.EXPLORED[explored % 2]};`
+            cursor: pointer;`
+            // background-color: ${colors.EXPLORED[explored % 2]};`
         );
+        this.elements.push({ u: 0.0, td });
+    }
+
+    fade(property, start, end, duration) {
+        const interval = 20;
+        const steps = duration / interval;
+        const step_u = 1.0 / steps;
+        setInterval(() => {
+            this.elements.forEach((el, index) => {
+                if (el.u >= 1.0) {
+                    this.elements.splice(index, 1);
+                }
+                let r = parseInt(lerp(start.r, end.r, el.u));
+                let g = parseInt(lerp(start.g, end.g, el.u));
+                let b = parseInt(lerp(start.b, end.b, el.u));
+                let colorname = 'rgb(' + r + ',' + g + ',' + b + ')';
+                el.td.style.setProperty(property, colorname);
+                el.u += step_u;
+            });
+        }, interval);
     }
 
     async breadthFirstSearch() {
