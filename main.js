@@ -39,7 +39,6 @@ let lightTheme = true;
 const themeButton = document.getElementById('theme');
 themeButton.onclick = () => {
     lightTheme = !lightTheme;
-    console.log(themeButton.firstElementChild)
     themeButton.firstElementChild.classList.toggle('fa-sun')
     themeButton.firstElementChild.classList.toggle('fa-moon')
     rootCSSKeys.forEach(({ key, light, dark }) =>

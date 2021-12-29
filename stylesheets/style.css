@@ -59,8 +59,10 @@ td {
     -webkit-transition: background-color 0.5s ease-out;
     -moz-transition: background-color 0.5s ease-out;
     -o-transition: background-color 0.5s ease-out;
-    transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-outne;
 }
+
+
 table td:first-child {
     border-left: none;
 }
@@ -93,7 +95,7 @@ td:hover {
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-       #action-container {
+    #action-container {
         grid-template-areas:
             'toggle theme search'
             'speed speed speed'
@@ -104,7 +106,6 @@ td:hover {
         grid-template-columns: 1fr 3fr 3fr; */
     }
 }
-
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 560px) {

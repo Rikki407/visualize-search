@@ -1,6 +1,6 @@
 import Cell from './Cell';
 import colors from './colors';
-import { fade, PriorityQueue } from './utility';
+import { PriorityQueue } from './utility';
 class Board {
     constructor(parent, toggle, speedSlider, sizeSlider) {
         this.parent = parent;
@@ -43,7 +43,7 @@ class Board {
                 this.styleNormal(td);
                 td.addEventListener('click', () => this.onClick(i, j));
                 this.setElement(i, j, {
-                    explored: false,
+                    explored: 0,
                     td,
                 });
                 tr.appendChild(td);
@@ -69,11 +69,11 @@ class Board {
     }
 
     explore(cell) {
-        const element = this.getElement(cell);
-        this.styleExplore(element.td);
+        const { td, explored } = this.getElement(cell);
+        this.styleExplore(td, explored);
         this.setElement(cell.row, cell.col, {
-            explored: true,
-            td: element.td,
+            explored: explored + 1,
+            td,
         });
         return new Promise((res) => setTimeout(res, this.speed));
     }
@@ -98,17 +98,14 @@ class Board {
     styleGoal(td) {
         td.setAttribute('style', `background: ${colors.GOAL};`);
     }
-    styleExplore(td) {
+    styleExplore(td, explored) {
         td.setAttribute(
             'style',
             `height:${this.cellSize - 4}px;
             width:${this.cellSize - 2}px;
             cursor: pointer;
-            background-color: ${colors.EXPLORED};`
+            background-color: ${colors.EXPLORED[explored % 2]};`
         );
-        const startColor = { r: 255, g: 0, b: 0 }; // red
-        const endColor = { r: 0, g: 128, b: 128 }; // dark turquoise
-        fade(td, 'background-color', startColor, endColor, 1000);
     }
 
     async breadthFirstSearch() {
