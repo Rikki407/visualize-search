@@ -5,7 +5,6 @@ main {
     width: 100%;
     margin: 0;
     padding: 0;
-    padding-bottom: 40px;
     font-family: 'IBM Plex Sans Condensed', sans-serif;
 }
 main {
@@ -19,12 +18,13 @@ main {
     border-radius: 12px;
     width: 95%;
     padding: 8px;
+    margin-bottom: 40px;
     box-shadow: inset 4px 4px 16px -7px var(--l-light),
         inset -7px -7px 9px -6px var(--l-shadow),
         6px 6px 12px 1px var(--l-shadow);
 }
 #action-container {
-    margin: 20px 0;
+    margin: 12px 0;
     display: grid;
     width: 95%;
 }
