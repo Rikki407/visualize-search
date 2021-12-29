@@ -1,6 +1,6 @@
 import './stylesheets/style.css';
 import './stylesheets/neumorphic.css';
-import Board from './src/Board';
+import Board from './src/board';
 
 const rootCSSKeys = [
     { key: '--main-color', light: '#fd8421', dark: '#79e3b6' },

@@ -1,8 +1,8 @@
-import Cell from './Cell';
+import Algorithms from './algorithms';
+import Cell from './cell';
 import colors from './colors';
-import { PriorityQueue } from './utility';
+// import { PriorityQueue } from './utility';
 
-const lerp = (a, b, u) => (1 - u) * a + u * b;
 class Board {
     constructor(parent, toggle, speedSlider, sizeSlider) {
         this.parent = parent;
@@ -13,11 +13,14 @@ class Board {
         this.elements = [];
         this.speed = parseInt(speedSlider.value);
         this.cellSize = parseInt(sizeSlider.value);
-        this.breadthFirstSearch = this.breadthFirstSearch.bind(this);
-        this.depthFirstSearch = this.depthFirstSearch.bind(this);
-        this.iterativeDeepeningSearch =
-            this.iterativeDeepeningSearch.bind(this);
-        this.aStarSearch = this.aStarSearch.bind(this);
+        Algorithms.call(
+            this,
+            this.start,
+            this.goal,
+            this.rows,
+            this.cols,
+            this.explore
+        );
         window.addEventListener('resize', () => this.updateTable());
         speedSlider.addEventListener(
             'input',
@@ -119,6 +122,7 @@ class Board {
         const interval = 20;
         const steps = duration / interval;
         const step_u = 1.0 / steps;
+        const lerp = (a, b, u) => (1 - u) * a + u * b;
         setInterval(() => {
             this.elements.forEach((el, index) => {
                 if (el.u >= 1.0) {
@@ -132,72 +136,6 @@ class Board {
                 el.u += step_u;
             });
         }, interval);
-    }
-
-    async breadthFirstSearch() {
-        const frontier = [this.start];
-        const reached = new Map([[this.start.repr, true]]);
-        while (frontier.length !== 0) {
-            const curr = frontier.shift();
-            for (const neighbor of curr.getNeighbors(this.rows, this.cols)) {
-                if (neighbor.isEqual(this.goal)) return true;
-                if (!reached.has(neighbor.repr)) {
-                    await this.explore(neighbor);
-                    reached.set(neighbor.repr, true);
-                    frontier.push(neighbor);
-                }
-            }
-        }
-        return false;
-    }
-
-    async depthFirstSearch(limit = Infinity) {
-        const frontier = [this.start];
-        while (frontier.length !== 0) {
-            const curr = frontier.pop();
-            if (curr.isEqual(this.goal)) return true;
-            if (!curr.isEqual(this.start)) await this.explore(curr);
-            if (curr.depth <= limit && !curr.isCycle())
-                for (const neighbor of curr.getNeighbors(this.rows, this.cols))
-                    frontier.push(neighbor);
-        }
-        return false;
-    }
-
-    async iterativeDeepeningSearch() {
-        let limit = 0;
-        let result = false;
-        while (!result) {
-            limit++;
-            result = await this.depthFirstSearch(limit);
-        }
-    }
-    f(cell) {
-        const g = cell.depth;
-        const h = Math.pow(
-            Math.pow(cell.row - this.goal.row, 2) +
-                Math.pow(cell.col - this.goal.col, 2),
-            0.5
-        );
-        return g + h;
-    }
-    async aStarSearch() {
-        const frontier = new PriorityQueue((a, b) => this.f(a) < this.f(b));
-        frontier.push(this.start);
-        const reached = new Map([[this.start.repr, this.start]]);
-        while (!frontier.isEmpty()) {
-            const curr = frontier.pop();
-            if (curr.isEqual(this.goal)) return true;
-            if (!curr.isEqual(this.start)) await this.explore(curr);
-            for (const neighbor of curr.getNeighbors(this.rows, this.cols)) {
-                const r = neighbor.repr;
-                if (!reached.has(r) || neighbor.depth < reached[r]?.depth) {
-                    reached.set(neighbor.repr, neighbor);
-                    frontier.push(neighbor);
-                }
-            }
-        }
-        return false;
     }
 }
 
