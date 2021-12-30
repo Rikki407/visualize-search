@@ -2,7 +2,8 @@
 <h2>An interactive playground to visualize various search algorithms like 
 
 `Breadth First, Depth First, Iterative Deepening, A* Search and more` </h2>
-<h2><a href="https://algosearch.netlify.app/">Project Link</a></h2>
+<h2><a href="https://algosearch.netlify.app/">Project Link: algosearch.netlify.app</a>
+</h2>
 
 <img alt="GIF" src="./search-demo.gif" />
 
