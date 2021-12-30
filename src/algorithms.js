@@ -29,12 +29,15 @@ function Algorithms(start, goal, rows, cols, explore) {
         while (frontier.length !== 0) {
             const curr = frontier.pop();
             if (curr.isEqual(this.goal)) return true;
-            if (!curr.isEqual(this.start))
-                await this.explore(curr, limit === Infinity ? 'dfs' : 'idfs');
-            console.log(curr.isCycle());
-            if (curr.depth <= limit && !curr.isCycle())
+            if (curr.depth <= limit && !curr.isCycle()) {
+                if (!curr.isEqual(this.start))
+                    await this.explore(
+                        curr,
+                        limit === Infinity ? 'dfs' : 'idfs'
+                    );
                 for (const neighbor of curr.getNeighbors(this.rows, this.cols))
                     frontier.push(neighbor);
+            }
         }
         return false;
     };
@@ -49,11 +52,16 @@ function Algorithms(start, goal, rows, cols, explore) {
     };
     this.f = (cell) => {
         const g = cell.depth;
-        const h = Math.pow(
-            Math.pow(cell.row - this.goal.row, 2) +
-                Math.pow(cell.col - this.goal.col, 2),
-            0.5
-        );
+        /* Eucledian Distance */
+        // const h = Math.pow(
+        //     Math.pow(cell.row - this.goal.row, 2) +
+        //         Math.pow(cell.col - this.goal.col, 2),
+        //     0.5
+        // );
+        /* Manhatten Distance */
+        const h =
+            Math.abs(cell.row - this.goal.row) +
+            Math.abs(cell.col - this.goal.col);
         return g + h;
     };
     this.aStarSearch = async () => {
