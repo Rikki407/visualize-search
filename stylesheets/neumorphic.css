@@ -113,12 +113,13 @@ main {
 #speed-slider {
     direction: rtl;
 }
-.neu-input {
+.neu-input-container {
     position: relative;
     height: 30px;
     flex: 1;
+    padding: 0 4px;
 }
-.neu-input:before {
+.neu-input-container:before {
     cursor: pointer;
     content: '';
     position: absolute;
@@ -135,6 +136,7 @@ input[type='range'] {
     -webkit-appearance: none;
     margin: 0;
     width: 100%;
+    height: 100%;
     background: transparent;
     position: relative;
 }
@@ -149,7 +151,6 @@ input[type='range']::-webkit-slider-thumb {
     margin: 4px 0;
     background: var(--main-color);
     border-radius: 100%;
-    cursor: pointer !important;
     box-shadow: inset 0.8em 0.8em 5px -7px var(--thumb-shine),
         inset -0.4em -0.4em 10px -3px rgba(0, 0, 0, 0.2),
         0.7em 0.5em 7px -0.5em rgba(0, 0, 0, 0.4);
@@ -159,7 +160,6 @@ input[type='range']::-webkit-slider-thumb {
 input[type='range']::-moz-range-thumb {
     width: 22px;
     height: 22px;
-    margin: 4px 0;
     background: var(--main-color);
     border-radius: 100%;
     box-shadow: inset 0.8em 0.8em 5px -7px var(--thumb-shine),
@@ -167,13 +167,6 @@ input[type='range']::-moz-range-thumb {
         0.7em 0.5em 7px -0.5em rgba(0, 0, 0, 0.4);
     cursor: pointer;
     border: 0;
-}
-
-input[type='range']::-webkit-slider-runnable-track {
-    padding: 2px 6px;
-}
-input[type='range']::-moz-range-track {
-    padding: 2px 6px;
 }
 
 /*---toggle---*/

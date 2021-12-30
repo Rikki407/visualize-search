@@ -32,19 +32,23 @@
                 </div>
                 <div id="speed" class="slider-container">
                     <div class="label-text">Speed</div>
-                    <input type="range" class="neu-input" id="speed-slider" max="250"/>
+                    <div class="neu-input-container">
+                        <input type="range" id="speed-slider" max="250" />
+                    </div>
                 </div>
                 <div id="size" class="slider-container">
                     <div class="label-text">Grid Size</div>
-                    <input
-                        class="neu-input"
-                        type="range"
-                        id="size-slider"
-                        min="20"
-                        max="50"
-                        value="35"
-                        style="z-index: 10"
-                    />
+                    <div class="neu-input-container">
+                        <input
+                            class="neu-input"
+                            type="range"
+                            id="size-slider"
+                            min="20"
+                            max="50"
+                            value="35"
+                            style="z-index: 10"
+                        />
+                    </div>
                 </div>
 
                 <div class="neu-button" style="width: 6em" id="search">
