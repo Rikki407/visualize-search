@@ -31,6 +31,7 @@ function Algorithms(start, goal, rows, cols, explore) {
             if (curr.isEqual(this.goal)) return true;
             if (!curr.isEqual(this.start))
                 await this.explore(curr, limit === Infinity ? 'dfs' : 'idfs');
+            console.log(curr.isCycle());
             if (curr.depth <= limit && !curr.isCycle())
                 for (const neighbor of curr.getNeighbors(this.rows, this.cols))
                     frontier.push(neighbor);

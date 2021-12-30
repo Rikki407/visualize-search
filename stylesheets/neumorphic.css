@@ -86,7 +86,9 @@ main {
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
-    filter: blur(0.3px);
+    filter: blur(0);
+    -webkit-filter: blur(0);
+    transform: translateZ(0);
     color: var(--l-object);
 }
 .neu-button:hover i {
@@ -147,7 +149,8 @@ input[type='range']::-webkit-slider-thumb {
     margin: 4px 0;
     background: var(--main-color);
     border-radius: 100%;
-    box-shadow: inset 0.8em 0.8em 5px -8px var(--thumb-shine),
+    cursor: pointer !important;
+    box-shadow: inset 0.8em 0.8em 5px -7px var(--thumb-shine),
         inset -0.4em -0.4em 10px -3px rgba(0, 0, 0, 0.2),
         0.7em 0.5em 7px -0.5em rgba(0, 0, 0, 0.4);
     cursor: pointer;
@@ -159,7 +162,7 @@ input[type='range']::-moz-range-thumb {
     margin: 4px 0;
     background: var(--main-color);
     border-radius: 100%;
-    box-shadow: inset 0.8em 0.8em 5px -8px var(--thumb-shine),
+    box-shadow: inset 0.8em 0.8em 5px -7px var(--thumb-shine),
         inset -0.4em -0.4em 10px -3px rgba(0, 0, 0, 0.2),
         0.7em 0.5em 7px -0.5em rgba(0, 0, 0, 0.4);
     cursor: pointer;
@@ -198,7 +201,9 @@ input[type='range']::-moz-range-track {
     content: '';
     width: 49px;
     height: 24px;
-    filter: blur(0.6px);
+    filter: blur(0.6px);    
+    -webkit-filter: blur(0);
+    transform: translateZ(0);
     position: absolute;
     border-radius: 1em;
     background: var(--hole-neutral);
@@ -221,6 +226,8 @@ input[type='range']::-moz-range-track {
     height: 20px;
     margin: 2px 2px;
     filter: blur(0.3px);
+    -webkit-filter: blur(0);
+    transform: translateZ(0);
     position: absolute;
     border-radius: 1em;
     background: var(--l-neutral);
@@ -252,6 +259,7 @@ input[type='range']::-moz-range-track {
     box-shadow: 7px 7px 15px var(--l-shadow), -7px -7px 15px var(--l-light);
 }
 .select select {
+    -webkit-appearance: none;
     appearance: none;
     width: 100%;
     height: 100%;
