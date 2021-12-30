@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
         document.getElementById('search').onclick = () => board[target.value]();
     };
 });
-let lightTheme = true;
+let lightTheme = false;
 const themeButton = document.getElementById('theme');
 themeButton.onclick = () => {
     lightTheme = !lightTheme;
