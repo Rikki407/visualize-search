@@ -6,6 +6,7 @@ function Algorithms(start, goal, rows, cols, explore) {
     this.rows = rows;
     this.cols = cols;
     this.explore = explore;
+
     this.breadthFirstSearch = async () => {
         const frontier = [this.start];
         const reached = new Map([[this.start.repr, true]]);
@@ -14,7 +15,7 @@ function Algorithms(start, goal, rows, cols, explore) {
             for (const neighbor of curr.getNeighbors(this.rows, this.cols)) {
                 if (neighbor.isEqual(this.goal)) return true;
                 if (!reached.has(neighbor.repr)) {
-                    await this.explore(neighbor);
+                    await this.explore(neighbor, 'bfs');
                     reached.set(neighbor.repr, true);
                     frontier.push(neighbor);
                 }
@@ -28,7 +29,8 @@ function Algorithms(start, goal, rows, cols, explore) {
         while (frontier.length !== 0) {
             const curr = frontier.pop();
             if (curr.isEqual(this.goal)) return true;
-            if (!curr.isEqual(this.start)) await this.explore(curr);
+            if (!curr.isEqual(this.start))
+                await this.explore(curr, limit === Infinity ? 'dfs' : 'idfs');
             if (curr.depth <= limit && !curr.isCycle())
                 for (const neighbor of curr.getNeighbors(this.rows, this.cols))
                     frontier.push(neighbor);
@@ -60,7 +62,7 @@ function Algorithms(start, goal, rows, cols, explore) {
         while (!frontier.isEmpty()) {
             const curr = frontier.pop();
             if (curr.isEqual(this.goal)) return true;
-            if (!curr.isEqual(this.start)) await this.explore(curr);
+            if (!curr.isEqual(this.start)) await this.explore(curr, 'a*');
             for (const neighbor of curr.getNeighbors(this.rows, this.cols)) {
                 const r = neighbor.repr;
                 if (!reached.has(r) || neighbor.depth < reached[r]?.depth) {

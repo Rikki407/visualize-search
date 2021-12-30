@@ -1,15 +1,12 @@
 import Algorithms from './algorithms';
 import Cell from './cell';
 import colors from './colors';
-// import { PriorityQueue } from './utility';
 
 class Board {
     constructor(parent, toggle, speedSlider, sizeSlider) {
         this.parent = parent;
         this.toggle = toggle;
         this.grid = new Map();
-        this.start = null;
-        this.end = null;
         this.elements = [];
         this.speed = parseInt(speedSlider.value);
         this.cellSize = parseInt(sizeSlider.value);
@@ -30,9 +27,7 @@ class Board {
             this.cellSize = parseInt(target.value);
             this.updateTable();
         });
-        const startColor = { r: 255, g: 0, b: 0 }; // red
-        const endColor = { r: 0, g: 128, b: 128 }; // dark turquoise
-        this.fade('background-color', startColor, endColor, 1000);
+        this.fade('background-color', 1000);
     }
     getElement(cell) {
         return this.grid.get(`${cell.row}-${cell.col}`);
@@ -51,10 +46,7 @@ class Board {
                 const td = document.createElement('td');
                 this.styleNormal(td);
                 td.addEventListener('click', () => this.onClick(i, j));
-                this.setElement(i, j, {
-                    explored: 0,
-                    td,
-                });
+                this.setElement(i, j, { td });
                 tr.appendChild(td);
             }
             table.appendChild(tr);
@@ -77,13 +69,31 @@ class Board {
         action === 'start' ? this.styleStart(td) : this.styleGoal(td);
     }
 
-    explore(cell) {
-        const { td, explored } = this.getElement(cell);
-        this.styleExplore(td, explored);
-        this.setElement(cell.row, cell.col, {
-            explored: explored + 1,
-            td,
-        });
+    explore(cell, algo) {
+        const { td } = this.getElement(cell);
+        let start, end;
+        switch (algo) {
+            case 'bfs':
+                start = { r: 255, g: 0, b: 0 };
+                end = { r: 0, g: 128, b: 128 };
+                break;
+            case 'dfs':
+                start = { r: 247, g: 37, b: 133 };
+                end = { r: 72, g: 149, b: 239 };
+                break;
+            case 'idfs':
+                start = { r: 201, g: 24, b: 74 };
+                end = { r: 0, g: 109, b: 119 };
+                break;
+            case 'a*':
+                start = { r: 181, g: 23, b: 158 };
+                end = { r: 67, g: 97, b: 238 };
+                break;
+            default:
+                break;
+        }
+        this.elements.push({ u: 0.0, td, start, end });
+        this.setElement(cell.row, cell.col, { td });
         return new Promise((res) => setTimeout(res, this.speed));
     }
 
@@ -107,18 +117,8 @@ class Board {
     styleGoal(td) {
         td.setAttribute('style', `background: ${colors.GOAL};`);
     }
-    styleExplore(td) {
-        td.setAttribute(
-            'style',
-            `height:${this.cellSize - 4}px;
-            width:${this.cellSize - 2}px;
-            cursor: pointer;`
-            // background-color: ${colors.EXPLORED[explored % 2]};`
-        );
-        this.elements.push({ u: 0.0, td });
-    }
 
-    fade(property, start, end, duration) {
+    fade(property, duration) {
         const interval = 20;
         const steps = duration / interval;
         const step_u = 1.0 / steps;
@@ -128,10 +128,10 @@ class Board {
                 if (el.u >= 1.0) {
                     this.elements.splice(index, 1);
                 }
-                let r = parseInt(lerp(start.r, end.r, el.u));
-                let g = parseInt(lerp(start.g, end.g, el.u));
-                let b = parseInt(lerp(start.b, end.b, el.u));
-                let colorname = 'rgb(' + r + ',' + g + ',' + b + ')';
+                let r = parseInt(lerp(el.start.r, el.end.r, el.u));
+                let g = parseInt(lerp(el.start.g, el.end.g, el.u));
+                let b = parseInt(lerp(el.start.b, el.end.b, el.u));
+                let colorname = `rgba(${r}, ${g}, ${b}, ${0.8})`;
                 el.td.style.setProperty(property, colorname);
                 el.u += step_u;
             });
