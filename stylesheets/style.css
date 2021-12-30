@@ -6,24 +6,17 @@ main {
     margin: 0;
     padding: 0;
     font-family: 'IBM Plex Sans Condensed', sans-serif;
+    font-size: 18px;
+    background: var(--l-neutral);
+    color: var(--l-object);
 }
+
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-#grid-container {
-    background: var(--l-neutral);
-    display: block;
-    flex: 1;
-    border-radius: 12px;
-    width: 95%;
-    padding: 8px;
-    margin-bottom: 40px;
-    box-shadow: inset 4px 4px 16px -7px var(--l-light),
-        inset -7px -7px 9px -6px var(--l-shadow),
-        6px 6px 12px 1px var(--l-shadow);
-}
+
 #action-container {
     margin: 16px 0;
     display: grid;
@@ -49,7 +42,19 @@ main {
     grid-area: search;
     justify-self: end;
 }
-
+#grid-container {
+    background: var(--l-neutral);
+    display: grid;
+    place-items: center;
+    flex: 1;
+    border-radius: 12px;
+    width: 95%;
+    padding: 8px;
+    margin-bottom: 28px;
+    box-shadow: inset 4px 4px 16px -7px var(--l-light),
+        inset -7px -7px 9px -6px var(--l-shadow),
+        6px 6px 12px 1px var(--l-shadow);
+}
 table {
     border-collapse: collapse;
     border-radius: 12px;
@@ -62,7 +67,6 @@ td {
     -o-transition: background-color 0.3s ease-out;
     transition: background-color 0.3s ease-outne;
 }
-
 
 table td:first-child {
     border-left: none;
@@ -103,8 +107,10 @@ td:hover {
             'size size size'
             'select select select';
         gap: 12px;
-        /* grid-template-rows: 1fr 1fr;
-        grid-template-columns: 1fr 3fr 3fr; */
+        width: 85%;
+    }
+    #grid-container {
+        width: 85%;
     }
 }
 
@@ -115,8 +121,11 @@ td:hover {
             'toggle select theme search'
             'speed speed size size';
         gap: 12px;
-        /* grid-template-rows: 1fr 1fr;*/
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        width: 93%;
+    }
+    #grid-container {
+        width: 93%;
     }
 }
 
@@ -126,6 +135,9 @@ td:hover {
         grid-template-areas: 'toggle speed size select theme search ';
         gap: 20px;
         grid-template-columns: 1fr 3fr 3.2fr 2fr 1fr 2fr;
+    }
+    #grid-container {
+        width: 95%;
     }
 }
 

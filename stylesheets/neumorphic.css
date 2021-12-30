@@ -33,14 +33,7 @@
 	--l-shadow: #151322;
 	--l-object: #6d6d88;
 }
-html,
-body,
-main {
-    margin: 0;
-    background: var(--l-neutral);
-    font-size: 1.05em;
-    color: var(--l-object);
-}
+
 .container {
     width: calc(100vw - 200px);
     height: calc(100vh - 200px);

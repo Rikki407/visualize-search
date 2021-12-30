@@ -37,6 +37,8 @@ class Board {
     }
     makeTable() {
         this.rows = Math.round(this.parent.clientHeight / (this.cellSize - 1));
+        if (this.rows * (this.cellSize - 1) > this.parent.clientHeight)
+            this.rows -= 1;
         this.cols = Math.floor(window.innerWidth / this.cellSize);
         const table = document.createElement('table');
         table.setAttribute('cellspacing', 1);
