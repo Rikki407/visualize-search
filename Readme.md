@@ -1,7 +1,8 @@
 # Visualizing Search Algorithms
-<h3>An interactive playground to visualize various search algorithms like 
-
-`Breadth First, Depth First, Iterative Deepening, A* Search and more` </h3>
+<h3>
+  
+- An interactive playground to visualize various search algorithms like `Breadth First, Depth First, Iterative Deepening, A* Search and more` 
+- A *Neumorphic User Interface* for this project and a Dark theme:tada:</h3>
 <h2><a href="https://algosearch.netlify.app/">Project Link: algosearch.netlify.app</a>
 </h2>
 
