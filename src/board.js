@@ -92,6 +92,8 @@ class Board {
                 end = { r: 67, g: 97, b: 238 };
                 break;
             default:
+                start = { r: 255, g: 186, b: 8};
+                end = { r: 244, g: 140, b: 6 };
                 break;
         }
         this.elements.push({ u: 0.0, td, start, end });
@@ -133,7 +135,7 @@ class Board {
                 let r = parseInt(lerp(el.start.r, el.end.r, el.u));
                 let g = parseInt(lerp(el.start.g, el.end.g, el.u));
                 let b = parseInt(lerp(el.start.b, el.end.b, el.u));
-                let colorname = `rgba(${r}, ${g}, ${b}, ${0.8})`;
+                let colorname = `rgb(${r}, ${g}, ${b})`;
                 el.td.style.setProperty(property, colorname);
                 el.u += step_u;
             });
