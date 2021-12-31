@@ -27,7 +27,7 @@ class Board {
             this.cellSize = parseInt(target.value);
             this.updateTable();
         });
-        this.fade('background-color', 1000);
+        this.fade('background-color', 800);
     }
 
     getElement(cell) {
@@ -39,8 +39,9 @@ class Board {
     isBlocked(row, col) {
         return this.block.get(`${row}-${col}`);
     }
-    toggleBlock(row, col) {
-        this.block.set(`${row}-${col}`, this.block.get(`${row}-${col}`));
+    setBlock(row, col) {
+        this.block.set(`${row}-${col}`, true);
+        this.styleBlock(this.grid.get(`${row}-${col}`).td);
     }
     makeTable() {
         this.rows = Math.round(this.parent.clientHeight / (this.cellSize - 1));
@@ -55,10 +56,9 @@ class Board {
                 const td = document.createElement('td');
                 this.styleNormal(td);
                 td.addEventListener('click', () => this.onClick(i, j));
-                td.addEventListener('mouseover', (e) => {
+                td.addEventListener('mousemove', (e) => {
                     if (e.shiftKey) {
-                        console.log('HEREEEE');
-                        this.toggleBlock(i, j);
+                        this.setBlock(i, j);
                     }
                 });
                 this.setElement(i, j, { td });
@@ -138,12 +138,12 @@ class Board {
                 end = [0, 109, 119];
                 break;
             case 'a*':
-                start = [181, 23, 158];
-                end = [67, 97, 238];
-                break;
-            case 'ida*':
                 start = [6, 214, 160];
                 end = [239, 71, 111];
+                break;
+            case 'ida*':
+                start = [181, 23, 158];
+                end = [67, 97, 238];
                 break;
             default:
                 start = [255, 186, 8];
@@ -167,13 +167,15 @@ class Board {
     styleStart(td) {
         td.setAttribute(
             'style',
-            `height:${this.cellSize - 4}px;
-            width:${this.cellSize - 2}px;
-            cursor: pointer;background: ${colors.START};`
+            `cursor: pointer;
+            background: ${colors.START};`
         );
     }
     styleGoal(td) {
         td.setAttribute('style', `background: ${colors.GOAL};`);
+    }
+    styleBlock(td) {
+        td.setAttribute('style', `background: ${colors.BLOCK};`);
     }
 
     fade(property, duration) {

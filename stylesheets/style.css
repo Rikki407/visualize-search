@@ -18,7 +18,7 @@ main {
 }
 
 #action-container {
-    margin: 16px 0;
+    margin: 4px 0 8px;
     display: grid;
     width: 95%;
 }
