@@ -76,24 +76,24 @@ class Board {
         let start, end;
         switch (algo) {
             case 'bfs':
-                start = { r: 255, g: 0, b: 0 };
-                end = { r: 0, g: 128, b: 128 };
+                start = [255, 0, 0];
+                end = [0, 128, 128];
                 break;
             case 'dfs':
-                start = { r: 247, g: 37, b: 133 };
-                end = { r: 72, g: 149, b: 239 };
+                start = [247, 37, 133];
+                end = [72, 149, 239];
                 break;
             case 'idfs':
-                start = { r: 201, g: 24, b: 74 };
-                end = { r: 0, g: 109, b: 119 };
+                start = [201, 24, 74];
+                end = [0, 109, 119];
                 break;
             case 'a*':
-                start = { r: 181, g: 23, b: 158 };
-                end = { r: 67, g: 97, b: 238 };
+                start = [181, 23, 158];
+                end = [67, 97, 238];
                 break;
             default:
-                start = { r: 255, g: 186, b: 8};
-                end = { r: 244, g: 140, b: 6 };
+                start = [255, 186, 8];
+                end = [244, 140, 6];
                 break;
         }
         this.elements.push({ u: 0.0, td, start, end });
@@ -132,9 +132,9 @@ class Board {
                 if (el.u >= 1.0) {
                     this.elements.splice(index, 1);
                 }
-                let r = parseInt(lerp(el.start.r, el.end.r, el.u));
-                let g = parseInt(lerp(el.start.g, el.end.g, el.u));
-                let b = parseInt(lerp(el.start.b, el.end.b, el.u));
+                let r = parseInt(lerp(el.start[0], el.end[0], el.u));
+                let g = parseInt(lerp(el.start[1], el.end[1], el.u));
+                let b = parseInt(lerp(el.start[2], el.end[2], el.u));
                 let colorname = `rgb(${r}, ${g}, ${b})`;
                 el.td.style.setProperty(property, colorname);
                 el.u += step_u;
