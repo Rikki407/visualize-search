@@ -7,25 +7,6 @@ class Cell {
         this.depth = parent ? parent.depth + 1 : 0;
     }
 
-    getNeighbors(maxRows, maxCols) {
-        const neigbors = [];
-        if (this.row > 0 && this.col < maxCols - 1)
-            neigbors.push(new Cell(this.row - 1, this.col + 1, this));
-        if (this.col < maxCols - 1)
-            neigbors.push(new Cell(this.row, this.col + 1, this));
-        if (this.row < maxRows - 1 && this.col < maxCols - 1)
-            neigbors.push(new Cell(this.row + 1, this.col + 1, this));
-        if (this.row < maxRows - 1)
-            neigbors.push(new Cell(this.row + 1, this.col, this));
-        if (this.row < maxRows - 1 && this.col > 0)
-            neigbors.push(new Cell(this.row + 1, this.col - 1, this));
-        if (this.col > 0) neigbors.push(new Cell(this.row, this.col - 1, this));
-        if (this.row > 0 && this.col > 0)
-            neigbors.push(new Cell(this.row - 1, this.col - 1, this));
-        if (this.row > 0) neigbors.push(new Cell(this.row - 1, this.col, this));
-        return neigbors;
-    }
-
     isCycle() {
         let current = this;
         while (current.parent !== null) {

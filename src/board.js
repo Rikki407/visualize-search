@@ -7,6 +7,7 @@ class Board {
         this.parent = parent;
         this.toggle = toggle;
         this.grid = new Map();
+        this.block = new Map();
         this.elements = [];
         this.speed = parseInt(speedSlider.value);
         this.cellSize = parseInt(sizeSlider.value);
@@ -14,8 +15,7 @@ class Board {
             this,
             this.start,
             this.goal,
-            this.rows,
-            this.cols,
+            this.getNeighbors,
             this.explore
         );
         window.addEventListener('resize', () => this.updateTable());
@@ -29,11 +29,18 @@ class Board {
         });
         this.fade('background-color', 1000);
     }
+
     getElement(cell) {
         return this.grid.get(`${cell.row}-${cell.col}`);
     }
     setElement(row, col, values) {
         this.grid.set(`${row}-${col}`, { ...values });
+    }
+    isBlocked(row, col) {
+        return this.block.get(`${row}-${col}`);
+    }
+    toggleBlock(row, col) {
+        this.block.set(`${row}-${col}`, this.block.get(`${row}-${col}`));
     }
     makeTable() {
         this.rows = Math.round(this.parent.clientHeight / (this.cellSize - 1));
@@ -48,6 +55,12 @@ class Board {
                 const td = document.createElement('td');
                 this.styleNormal(td);
                 td.addEventListener('click', () => this.onClick(i, j));
+                td.addEventListener('mouseover', (e) => {
+                    if (e.shiftKey) {
+                        console.log('HEREEEE');
+                        this.toggleBlock(i, j);
+                    }
+                });
                 this.setElement(i, j, { td });
                 tr.appendChild(td);
             }
@@ -62,6 +75,43 @@ class Board {
             this.parent.removeChild(this.table);
             this.makeTable();
         }
+    }
+
+    getNeighbors(cell) {
+        const neigbors = [];
+        if (
+            cell.row > 0 &&
+            cell.col < this.cols - 1 &&
+            !this.isBlocked(cell.row - 1, cell.col + 1)
+        )
+            neigbors.push(new Cell(cell.row - 1, cell.col + 1, cell));
+        if (cell.col < this.cols - 1 && !this.isBlocked(cell.row, cell.col + 1))
+            neigbors.push(new Cell(cell.row, cell.col + 1, cell));
+        if (
+            cell.row < this.rows - 1 &&
+            cell.col < this.cols - 1 &&
+            !this.isBlocked(cell.row + 1, cell.col + 1)
+        )
+            neigbors.push(new Cell(cell.row + 1, cell.col + 1, cell));
+        if (cell.row < this.rows - 1 && !this.isBlocked(cell.row + 1, cell.col))
+            neigbors.push(new Cell(cell.row + 1, cell.col, cell));
+        if (
+            cell.row < this.rows - 1 &&
+            cell.col > 0 &&
+            !this.isBlocked(cell.row + 1, cell.col - 1)
+        )
+            neigbors.push(new Cell(cell.row + 1, cell.col - 1, cell));
+        if (cell.col > 0 && !this.isBlocked(cell.row, cell.col - 1))
+            neigbors.push(new Cell(cell.row, cell.col - 1, cell));
+        if (
+            cell.row > 0 &&
+            cell.col > 0 &&
+            !this.isBlocked(cell.row - 1, cell.col - 1)
+        )
+            neigbors.push(new Cell(cell.row - 1, cell.col - 1, cell));
+        if (cell.row > 0 && !this.isBlocked(cell.row - 1, cell.col))
+            neigbors.push(new Cell(cell.row - 1, cell.col, cell));
+        return neigbors;
     }
 
     onClick(row, col, action = !this.toggle.checked ? 'start' : 'goal') {

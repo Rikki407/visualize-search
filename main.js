@@ -20,6 +20,21 @@ const rootCSSKeys = [
     { key: '--l-shadow', light: '#aaa4c4', dark: '#151322' },
     { key: '--l-object', light: '#8f8fb5', dark: '#6d6d88' },
 ];
+
+let lightTheme = false;
+const themeButton = document.getElementById('theme');
+themeButton.onclick = () => {
+    lightTheme = !lightTheme;
+    themeButton.firstElementChild.classList.toggle('fa-sun');
+    themeButton.firstElementChild.classList.toggle('fa-moon');
+    rootCSSKeys.forEach(({ key, light, dark }) =>
+        document.documentElement.style.setProperty(
+            key,
+            lightTheme ? light : dark
+        )
+    );
+};
+
 window.addEventListener('load', () => {
     const board = new Board(
         document.querySelector('#grid-container'),
@@ -28,6 +43,7 @@ window.addEventListener('load', () => {
         document.querySelector('#size-slider')
     );
     board.makeTable();
+
     document.getElementById('search').onclick = () =>
         board.breadthFirstSearch();
 
@@ -35,16 +51,3 @@ window.addEventListener('load', () => {
         document.getElementById('search').onclick = () => board[target.value]();
     };
 });
-let lightTheme = false;
-const themeButton = document.getElementById('theme');
-themeButton.onclick = () => {
-    lightTheme = !lightTheme;
-    themeButton.firstElementChild.classList.toggle('fa-sun')
-    themeButton.firstElementChild.classList.toggle('fa-moon')
-    rootCSSKeys.forEach(({ key, light, dark }) =>
-        document.documentElement.style.setProperty(
-            key,
-            lightTheme ? light : dark
-        )
-    );
-};

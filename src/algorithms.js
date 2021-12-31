@@ -1,11 +1,10 @@
 // import Cell from './cell';
 import { PriorityQueue } from './utility';
 
-function Algorithms(start, goal, rows, cols, explore) {
+function Algorithms(start, goal, getNeighbors, explore) {
     this.start = start;
     this.goal = goal;
-    this.rows = rows;
-    this.cols = cols;
+    this.getNeighbors = getNeighbors,
     this.explore = explore;
 
     this.drawPath = (cell) => {
@@ -23,7 +22,7 @@ function Algorithms(start, goal, rows, cols, explore) {
         const reached = new Map([[this.start.repr, true]]);
         while (frontier.length !== 0) {
             const curr = frontier.shift();
-            for (const neighbor of curr.getNeighbors(this.rows, this.cols)) {
+            for (const neighbor of this.getNeighbors(curr)) {
                 if (neighbor.isEqual(this.goal)) return this.drawPath(neighbor);
                 if (!reached.has(neighbor.repr)) {
                     await this.explore(neighbor, 'bfs');
@@ -46,7 +45,7 @@ function Algorithms(start, goal, rows, cols, explore) {
                         curr,
                         limit === Infinity ? 'dfs' : 'idfs'
                     );
-                for (const neighbor of curr.getNeighbors(this.rows, this.cols))
+                for (const neighbor of this.getNeighbors(curr))
                     frontier.push(neighbor);
             }
         }
@@ -79,7 +78,7 @@ function Algorithms(start, goal, rows, cols, explore) {
             const curr = frontier.pop();
             if (curr.isEqual(this.goal)) return this.drawPath(curr);
             if (!curr.isEqual(this.start)) await this.explore(curr, 'a*');
-            for (const neighbor of curr.getNeighbors(this.rows, this.cols)) {
+            for (const neighbor of this.getNeighbors(curr)) {
                 const r = neighbor.repr;
                 if (!reached.has(r) || neighbor.depth < reached[r]?.depth) {
                     reached.set(neighbor.repr, neighbor);
@@ -97,7 +96,7 @@ function Algorithms(start, goal, rows, cols, explore) {
             if (node.isEqual(this.goal)) return this.drawPath(node);
             if (!node.isEqual(this.start)) await this.explore(node, 'ida*');
             let min = Infinity;
-            for (const neighbor of node.getNeighbors(this.rows, this.cols)) {
+            for (const neighbor of this.getNeighbors(node)) {
                 if (!neighbor.isCycle()) {
                     path.push(neighbor);
                     const t = await search(path, bound);
