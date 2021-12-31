@@ -1,4 +1,3 @@
-// import Cell from './cell';
 import { PriorityQueue } from './utility';
 
 function Algorithms(start, goal, getNeighbors, explore) {
