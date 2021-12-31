@@ -1,3 +1,4 @@
+// import Cell from './cell';
 import { PriorityQueue } from './utility';
 
 function Algorithms(start, goal, rows, cols, explore) {
@@ -9,6 +10,7 @@ function Algorithms(start, goal, rows, cols, explore) {
 
     this.drawPath = (cell) => {
         let current = cell;
+        console.log('Depth', cell.depth);
         while (current.parent !== null) {
             this.explore(current);
             current = current.parent;
@@ -59,20 +61,16 @@ function Algorithms(start, goal, rows, cols, explore) {
             result = await this.depthFirstSearch(limit);
         }
     };
-    this.f = (cell) => {
-        const g = cell.depth;
-        /* Eucledian Distance */
-        // const h = Math.pow(
-        //     Math.pow(cell.row - this.goal.row, 2) +
-        //         Math.pow(cell.col - this.goal.col, 2),
-        //     0.5
-        // );
-        /* Manhatten Distance */
-        const h =
-            Math.abs(cell.row - this.goal.row) +
-            Math.abs(cell.col - this.goal.col);
-        return g + h;
+    this.g = (cell) => cell.depth;
+    // this.h = (cell) =>
+    //     Math.abs(cell.row - this.goal.row) + Math.abs(cell.col - this.goal.col);
+    this.h = (cell) => {
+        const dx = Math.abs(cell.row - this.goal.row);
+        const dy = Math.abs(cell.col - this.goal.col);
+        return dx + dy - Math.min(dx, dy);
     };
+    this.f = (cell) => this.g(cell) + this.h(cell);
+
     this.aStarSearch = async () => {
         const frontier = new PriorityQueue((a, b) => this.f(a) < this.f(b));
         frontier.push(this.start);
@@ -90,6 +88,34 @@ function Algorithms(start, goal, rows, cols, explore) {
             }
         }
         return false;
+    };
+    this.idaStarSearch = async () => {
+        const search = async (path, bound) => {
+            const node = path[path.length - 1];
+            const f = this.f(node);
+            if (f > bound) return f;
+            if (node.isEqual(this.goal)) return this.drawPath(node);
+            if (!node.isEqual(this.start)) await this.explore(node, 'ida*');
+            let min = Infinity;
+            for (const neighbor of node.getNeighbors(this.rows, this.cols)) {
+                if (!neighbor.isCycle()) {
+                    path.push(neighbor);
+                    const t = await search(path, bound);
+                    if (t === true) return true;
+                    if (t < min) min = t;
+                    path.pop();
+                }
+            }
+            return min;
+        };
+        let bound = this.h(this.start);
+        const path = [this.start];
+        while (true) {
+            const t = await search(path, bound);
+            if (t === true) return true;
+            if (t === Infinity) return false;
+            bound = t;
+        }
     };
 }
 export default Algorithms;

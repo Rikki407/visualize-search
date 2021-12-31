@@ -91,6 +91,10 @@ class Board {
                 start = [181, 23, 158];
                 end = [67, 97, 238];
                 break;
+            case 'ida*':
+                start = [6, 214, 160];
+                end = [239, 71, 111];
+                break;
             default:
                 start = [255, 186, 8];
                 end = [244, 140, 6];
