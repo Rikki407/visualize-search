@@ -37,9 +37,11 @@ main {
 }
 #theme {
     grid-area: theme;
+    justify-self: center;
 }
 #reset {
     grid-area: reset;
+    justify-self: center;
 }
 #search {
     grid-area: search;
@@ -115,33 +117,7 @@ td:hover {
     background-color: #a29ff5 !important;
 }
 
-@media only screen and (max-width: 380px) {
-    #action-container {
-        grid-template-areas:
-            'instructions instructions'
-            'toggle theme'
-            'speed speed'
-            'size size'
-            'select select'
-            'heuristic heuristic'
-            'search search';
-        gap: 16px;
-        width: 85%;
-    }
-    #instructions {
-        justify-self: center;
-    }
-    #heuristic {
-        justify-self: stretch;
-    }
-    #search {
-        width: 100% !important;
-    }
-    #grid-container {
-        width: 85%;
-    }
-}
-@media only screen and (max-width: 560px) {
+@media only screen and (max-width: 645px) {
     #action-container {
         grid-template-areas:
             'instructions instructions theme reset'
@@ -153,7 +129,7 @@ td:hover {
         gap: 20px;
         width: 85%;
     }
-    #reset{
+    #reset {
         justify-self: end;
     }
     #instructions {
@@ -168,12 +144,12 @@ td:hover {
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 560px) {
+@media only screen and (min-width: 645px) {
     #action-container {
         grid-template-areas:
             'toggle instructions instructions reset theme search'
-            'select select select heuristic heuristic heuristic'
-            'speed speed speed size size size';
+            'speed speed speed size size size'
+            'select select select heuristic heuristic heuristic';
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
         gap: 20px;
         width: 93%;
@@ -193,6 +169,7 @@ td:hover {
         grid-template-areas:
             'toggle select select select heuristic reset theme search'
             'speed speed speed instructions instructions size size size';
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
         gap: 20px;
         width: 93%;
     }
