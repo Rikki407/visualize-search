@@ -136,7 +136,7 @@ class Board {
         td.setAttribute(
             'style',
             `height:${this.cellSize - 4}px;
-            width:${this.cellSize - 2}px;
+            width:${this.cellSize}px;
             cursor: pointer;
             background-color:${colors.NORMAL};`
         );
@@ -152,7 +152,12 @@ class Board {
         td.setAttribute('style', `background: ${colors.GOAL};`);
     }
     styleBlock(td) {
-        td.setAttribute('style', `background: ${colors.BLOCK};`);
+        td.setAttribute(
+            'style',
+            `height:${this.cellSize - 4}px;
+            width:${this.cellSize}px;
+            background: ${colors.BLOCK};`
+        );
     }
 
     fade(property, duration) {
