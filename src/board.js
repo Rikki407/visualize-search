@@ -150,6 +150,10 @@ class Board {
                 start = [201, 24, 74];
                 end = [0, 109, 119];
                 break;
+            case 'uniform':
+                start = [160, 26, 88];
+                end = [23, 128, 161];
+                break;
             case 'a*':
                 start = [6, 214, 160];
                 end = [239, 71, 111];

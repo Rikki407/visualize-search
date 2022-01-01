@@ -88,6 +88,24 @@ function Algorithms(start, goal, getNeighbors, W, explore) {
         }
         return false;
     };
+    this.uniformCostSearch = async () => {
+        const frontier = new PriorityQueue((a, b) => this.g(a) < this.g(b));
+        frontier.push(this.start);
+        const reached = new Map([[this.start.repr, this.start]]);
+        while (!frontier.isEmpty()) {
+            const curr = frontier.pop();
+            if (curr.isEqual(this.goal)) return this.drawPath(curr);
+            if (!curr.isEqual(this.start)) await this.explore(curr, 'uniform');
+            for (const neighbor of this.getNeighbors(curr)) {
+                const r = neighbor.repr;
+                if (!reached.has(r) || neighbor.depth < reached[r]?.depth) {
+                    reached.set(neighbor.repr, neighbor);
+                    frontier.push(neighbor);
+                }
+            }
+        }
+        return false;
+    };
     this.idaStarSearch = async () => {
         const search = async (path, bound) => {
             const node = path[path.length - 1];
