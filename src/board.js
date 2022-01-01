@@ -12,14 +12,7 @@ class Board {
         this.speed = speedSlider.value;
         this.cellSize = sizeSlider.value;
         this.W = parseInt(wslider.value / 50);
-        Algorithms.call(
-            this,
-            this.start,
-            this.goal,
-            this.getNeighbors,
-            this.W,
-            this.explore
-        );
+        Algorithms.call(this, this.start, this.goal, this.getNeighbors, this.W);
         this.oldHeight = window.innerHeight;
         this.oldWidth = window.innerWidth;
         window.addEventListener('resize', () => {
@@ -132,44 +125,6 @@ class Board {
         this[action] = new Cell(row, col);
         const { td } = this.getElement(this[action]);
         action === 'start' ? this.styleStart(td) : this.styleGoal(td);
-    }
-
-    explore(cell, algo) {
-        const { td } = this.getElement(cell);
-        let start, end;
-        switch (algo) {
-            case 'bfs':
-                start = [255, 0, 0];
-                end = [0, 128, 128];
-                break;
-            case 'dfs':
-                start = [247, 37, 133];
-                end = [72, 149, 239];
-                break;
-            case 'idfs':
-                start = [201, 24, 74];
-                end = [0, 109, 119];
-                break;
-            case 'uniform':
-                start = [0, 21, 36];
-                end = [123, 44, 191];
-                break;
-            case 'a*':
-                start = [6, 214, 160];
-                end = [239, 71, 111];
-                break;
-            case 'ida*':
-                start = [181, 23, 158];
-                end = [67, 97, 238];
-                break;
-            default:
-                start = [255, 186, 8];
-                end = [244, 140, 6];
-                break;
-        }
-        this.elements.push({ u: 0.0, td, start, end });
-        this.setElement(cell.row, cell.col, { td });
-        return new Promise((res) => setTimeout(res, this.speed));
     }
 
     styleNormal(td) {

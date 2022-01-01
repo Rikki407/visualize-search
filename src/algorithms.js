@@ -1,12 +1,51 @@
 import { PriorityQueue } from './utility';
 
-function Algorithms(start, goal, getNeighbors, W, explore) {
+function Algorithms(start, goal, getNeighbors, W) {
     this.start = start;
     this.goal = goal;
     this.getNeighbors = getNeighbors;
     this.W = W;
-    this.explore = explore;
-
+    this.explore = (cell, algo) => {
+        const { td } = this.getElement(cell);
+        let start, end;
+        switch (algo) {
+            case 'bfs':
+                start = [255, 0, 0];
+                end = [0, 128, 128];
+                break;
+            case 'dfs':
+                start = [247, 37, 133];
+                end = [72, 149, 239];
+                break;
+            case 'idfs':
+                start = [201, 24, 74];
+                end = [0, 109, 119];
+                break;
+            case 'uniform':
+                start = [0, 21, 36];
+                end = [123, 44, 191];
+                break;
+            case 'greedy':
+                start = [131, 144, 250];
+                end = [186, 24, 27];
+                break;
+            case 'a*':
+                start = [6, 214, 160];
+                end = [239, 71, 111];
+                break;
+            case 'ida*':
+                start = [181, 23, 158];
+                end = [67, 97, 238];
+                break;
+            default:
+                start = [255, 186, 8];
+                end = [244, 140, 6];
+                break;
+        }
+        this.elements.push({ u: 0.0, td, start, end });
+        this.setElement(cell.row, cell.col, { td });
+        return new Promise((res) => setTimeout(res, this.speed));
+    };
     this.drawPath = (cell) => {
         let current = cell;
         console.log('Depth', cell.depth);
@@ -96,6 +135,24 @@ function Algorithms(start, goal, getNeighbors, W, explore) {
             const curr = frontier.pop();
             if (curr.isEqual(this.goal)) return this.drawPath(curr);
             if (!curr.isEqual(this.start)) await this.explore(curr, 'uniform');
+            for (const neighbor of this.getNeighbors(curr)) {
+                const r = neighbor.repr;
+                if (!reached.has(r) || neighbor.depth < reached[r]?.depth) {
+                    reached.set(neighbor.repr, neighbor);
+                    frontier.push(neighbor);
+                }
+            }
+        }
+        return false;
+    };
+    this.greedySearch = async () => {
+        const frontier = new PriorityQueue((a, b) => this.h(a) < this.h(b));
+        frontier.push(this.start);
+        const reached = new Map([[this.start.repr, this.start]]);
+        while (!frontier.isEmpty()) {
+            const curr = frontier.pop();
+            if (curr.isEqual(this.goal)) return this.drawPath(curr);
+            if (!curr.isEqual(this.start)) await this.explore(curr, 'greedy');
             for (const neighbor of this.getNeighbors(curr)) {
                 const r = neighbor.repr;
                 if (!reached.has(r) || neighbor.depth < reached[r]?.depth) {
