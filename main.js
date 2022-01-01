@@ -49,5 +49,13 @@ window.addEventListener('load', () => {
 
     document.getElementById('select').onchange = ({ target }) => {
         document.getElementById('search').onclick = () => board[target.value]();
+        document
+            .getElementById('heuristic')
+            .setAttribute(
+                'style',
+                `display: ${
+                    target.value === 'aStarSearch' ? 'flex' : 'none'
+                };`
+            );
     };
 });

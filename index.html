@@ -8,7 +8,6 @@
     </head>
     <body>
         <main>
-            <div style="margin-top: 12px;">Shift ⇧ & hover to block path</div>
             <div id="action-container">
                 <div class="toggle">
                     <span>Start</span>
@@ -48,7 +47,6 @@
                             min="10"
                             max="50"
                             value="30"
-                            style="z-index: 10"
                         />
                     </div>
                 </div>
@@ -59,6 +57,18 @@
 
                 <div class="neu-button" style="width: 6em" id="search">
                     <span>Search</span>
+                </div>
+                <div id="instructions">Shift ⇧ & hover to block path</div>
+                <div
+                    id="heuristic"
+                    class="slider-container"
+                    style="display: none"
+                >
+                    <div class="label-text">f = g +</div>
+                    <div class="neu-input-container">
+                        <input type="range" id="h-slider" disabled />
+                    </div>
+                    <div class="label-text">&nbsp;h</div>
                 </div>
             </div>
             <div id="grid-container"></div>

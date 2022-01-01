@@ -18,7 +18,7 @@ main {
 }
 
 #action-container {
-    margin: 4px 0 8px;
+    margin: 16px 0;
     display: grid;
     width: 95%;
 }
@@ -29,18 +29,28 @@ main {
     grid-area: select;
     justify-self: center;
 }
-#action-container > #speed {
+#speed {
     grid-area: speed;
 }
-#action-container > #size {
+#size {
     grid-area: size;
 }
-#action-container > #theme {
+#theme {
     grid-area: theme;
 }
-#action-container > #search {
+#search {
     grid-area: search;
     justify-self: end;
+}
+#instructions {
+    align-self: center;
+    grid-area: instructions;
+}
+#heuristic {
+    grid-area: heuristic;
+    justify-self: end;
+    font-size: 1.2em;
+    font-weight: 600;
 }
 #grid-container {
     background: var(--l-neutral);
@@ -55,6 +65,7 @@ main {
         inset -7px -7px 9px -6px var(--l-shadow),
         6px 6px 12px 1px var(--l-shadow);
 }
+
 table {
     border-collapse: collapse;
     border-radius: 12px;
@@ -98,16 +109,49 @@ td:hover {
     background-color: #a29ff5 !important;
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 380px) {
     #action-container {
         grid-template-areas:
+            'instructions instructions'
+            'toggle theme'
+            'speed speed'
+            'size size'
+            'select select'
+            'heuristic heuristic'
+            'search search';
+        gap: 16px;
+        width: 85%;
+    }
+    #instructions {
+        justify-self: center;
+    }
+    #heuristic {
+        justify-self: stretch;
+    }
+    #search {
+        width: 100% !important;
+    }
+    #grid-container {
+        width: 85%;
+    }
+}
+@media only screen and (min-width: 380px) {
+    #action-container {
+        grid-template-areas:
+            'instructions instructions instructions'
             'toggle theme search'
             'speed speed speed'
             'size size size'
-            'select select select';
+            'select select select'
+            'heuristic heuristic heuristic';
         gap: 12px;
         width: 85%;
+    }
+    #instructions {
+        justify-self: center;
+    }
+    #heuristic {
+        justify-self: stretch;
     }
     #grid-container {
         width: 85%;
@@ -118,28 +162,40 @@ td:hover {
 @media only screen and (min-width: 560px) {
     #action-container {
         grid-template-areas:
-            'toggle select theme search'
-            'speed speed size size';
-        gap: 12px;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+            'toggle instructions instructions instructions theme search'
+            'select select select heuristic heuristic heuristic'
+            'speed speed speed size size size';
+        gap: 20px;
         width: 93%;
+    }
+    #instructions {
+        justify-self: center;
+    }
+    #grid-container {
+        width: 93%;
+    }
+    #heuristic {
+        justify-self: stretch;
+    }
+}
+@media only screen and (min-width: 910px) {
+    #action-container {
+        grid-template-areas:
+            'toggle select select heuristic heuristic theme search'
+            'speed speed size size instructions instructions instructions';
+        gap: 20px;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr auto 1fr;
+        width: 93%;
+    }
+    #instructions {
+        justify-self: end;
     }
     #grid-container {
         width: 93%;
     }
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 1200px) {
-    #action-container {
-        grid-template-areas: 'toggle speed size select theme search ';
-        gap: 20px;
-        grid-template-columns: 1fr 3fr 3.2fr 2fr 1fr 2fr;
-    }
-    #grid-container {
-        width: 95%;
-    }
-}
+
 
 /* Extra large devices (large laptops and desktops, 1200px and up)
 @media only screen and (min-width: 1200px) {

@@ -49,7 +49,6 @@
 .neu-button {
     width: 2.5em;
     height: 2.5em;
-    margin: 1em;
     position: relative;
     display: flex;
     justify-content: center;
@@ -129,7 +128,7 @@ input[type='range'] {
     -webkit-appearance: none;
     margin: 0;
     width: 100%;
-    height: 100%;
+    height: 30px;
     background: transparent;
     position: relative;
 }
@@ -231,7 +230,6 @@ input[type='range']::-moz-range-thumb {
 .select {
     height: 2.5em;
     width: 98%;
-    margin: 1em;
     position: relative;
 }
 .select:before {
