@@ -20,7 +20,18 @@ class Board {
             this.W,
             this.explore
         );
-        window.addEventListener('resize', () => this.updateTable());
+        this.oldHeight = window.innerHeight;
+        this.oldWidth = window.innerWidth;
+        window.addEventListener('resize', () => {
+            if (
+                Math.abs(this.oldHeight - window.innerHeight) > 60 ||
+                this.oldWidth !== window.innerWidth
+            ) {
+                this.updateTable();
+                this.oldHeight = window.innerHeight;
+                this.oldWidth = window.innerWidth;
+            }
+        });
         speedSlider.addEventListener('input', ({ target }) => {
             this.speed = target.value;
         });
@@ -61,9 +72,7 @@ class Board {
                 this.styleNormal(td);
                 td.addEventListener('click', () => this.onClick(i, j));
                 td.addEventListener('mousemove', (e) => {
-                    if (e.shiftKey) {
-                        this.setBlock(i, j);
-                    }
+                    if (e.shiftKey) this.setBlock(i, j);
                 });
                 this.setElement(i, j, { td });
                 tr.appendChild(td);
