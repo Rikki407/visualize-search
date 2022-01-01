@@ -44,9 +44,10 @@ window.addEventListener('load', () => {
         document.getElementById('w-slider')
     );
     board.makeTable();
-
-    document.getElementById('search').onclick = () =>
+    
+    document.getElementById('search').onclick = () => {
         board.breadthFirstSearch();
+    };
 
     document.getElementById('select').onchange = ({ target }) => {
         document.getElementById('search').onclick = () => board[target.value]();
@@ -58,5 +59,9 @@ window.addEventListener('load', () => {
             );
         document.getElementById('w-slider').value = 50;
         board.W = 1;
+    };
+
+    document.getElementById('reset').onclick = () => {
+        board.reset();
     };
 });

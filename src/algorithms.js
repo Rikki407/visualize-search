@@ -48,7 +48,7 @@ function Algorithms(start, goal, getNeighbors, W) {
     };
     this.drawPath = (cell) => {
         let current = cell;
-        console.log('Depth', cell.depth);
+        console.log('Path Cost', cell.depth);
         while (current.parent !== null) {
             this.explore(current);
             current = current.parent;
@@ -105,7 +105,7 @@ function Algorithms(start, goal, getNeighbors, W) {
     this.h = (cell) => {
         const dx = Math.abs(cell.row - this.goal.row);
         const dy = Math.abs(cell.col - this.goal.col);
-        return dx + dy - Math.min(dx, dy);
+        return Math.max(dx, dy);
     };
     this.f = (cell) => this.g(cell) + this.W * this.h(cell);
 

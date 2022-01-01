@@ -167,7 +167,7 @@ td:hover {
 @media only screen and (min-width: 910px) {
     #action-container {
         grid-template-areas:
-            'toggle select select select heuristic reset theme search'
+            'toggle select select heuristic heuristic reset theme search'
             'speed speed speed instructions instructions size size size';
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
         gap: 20px;

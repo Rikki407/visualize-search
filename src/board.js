@@ -6,6 +6,11 @@ class Board {
     constructor(parent, toggle, speedSlider, sizeSlider, wslider) {
         this.parent = parent;
         this.toggle = toggle;
+        this.speedSlider = speedSlider;
+        this.sizeSlider = sizeSlider;
+        this.wslider = wslider;
+        this.start = null;
+        this.end = null;
         this.grid = new Map();
         this.block = new Map();
         this.elements = [];
@@ -168,6 +173,18 @@ class Board {
                 el.u += step_u;
             });
         }, interval);
+    }
+
+    reset() {
+        this.start = null;
+        this.goal = null;
+        this.speedSlider.value = 125;
+        this.speed = 125;
+        this.sizeSlider.value = 30;
+        this.cellSize = 30;
+        this.wslider.value = 50;
+        this.W = 50;
+        this.updateTable();
     }
 }
 
