@@ -18,7 +18,7 @@ const rootCSSKeys = [
     { key: '--l-neutral', light: '#dedeed', dark: '#303040' },
     { key: '--l-light', light: '#f1f1f7', dark: '#424255' },
     { key: '--l-shadow', light: '#aaa4c4', dark: '#151322' },
-    { key: '--l-object', light: '#8f8fb5', dark: '#6d6d88' },
+    { key: '--l-object', light: '#8f8fb5', dark: '#9d9da7' },
 ];
 
 let lightTheme = false;
@@ -37,10 +37,11 @@ themeButton.onclick = () => {
 
 window.addEventListener('load', () => {
     const board = new Board(
-        document.querySelector('#grid-container'),
-        document.querySelector('#toggle'),
-        document.querySelector('#speed-slider'),
-        document.querySelector('#size-slider')
+        document.getElementById('grid-container'),
+        document.getElementById('toggle'),
+        document.getElementById('speed-slider'),
+        document.getElementById('size-slider'),
+        document.getElementById('w-slider')
     );
     board.makeTable();
 
@@ -53,9 +54,7 @@ window.addEventListener('load', () => {
             .getElementById('heuristic')
             .setAttribute(
                 'style',
-                `display: ${
-                    target.value === 'aStarSearch' ? 'flex' : 'none'
-                };`
+                `display: ${target.value === 'aStarSearch' ? 'flex' : 'none'};`
             );
     };
 });

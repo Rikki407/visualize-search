@@ -1,9 +1,10 @@
 import { PriorityQueue } from './utility';
 
-function Algorithms(start, goal, getNeighbors, explore) {
+function Algorithms(start, goal, getNeighbors, W, explore) {
     this.start = start;
     this.goal = goal;
-    this.getNeighbors = getNeighbors,
+    this.getNeighbors = getNeighbors;
+    this.W = W;
     this.explore = explore;
 
     this.drawPath = (cell) => {
@@ -67,7 +68,7 @@ function Algorithms(start, goal, getNeighbors, explore) {
         const dy = Math.abs(cell.col - this.goal.col);
         return dx + dy - Math.min(dx, dy);
     };
-    this.f = (cell) => this.g(cell) + this.h(cell);
+    this.f = (cell) => this.g(cell) + this.W * this.h(cell);
 
     this.aStarSearch = async () => {
         const frontier = new PriorityQueue((a, b) => this.f(a) < this.f(b));

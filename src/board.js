@@ -3,29 +3,33 @@ import Cell from './cell';
 import colors from './colors';
 
 class Board {
-    constructor(parent, toggle, speedSlider, sizeSlider) {
+    constructor(parent, toggle, speedSlider, sizeSlider, wslider) {
         this.parent = parent;
         this.toggle = toggle;
         this.grid = new Map();
         this.block = new Map();
         this.elements = [];
-        this.speed = parseInt(speedSlider.value);
-        this.cellSize = parseInt(sizeSlider.value);
+        this.speed = speedSlider.value;
+        this.cellSize = sizeSlider.value;
+        this.W = parseInt(wslider.value / 50);
         Algorithms.call(
             this,
             this.start,
             this.goal,
             this.getNeighbors,
+            this.W,
             this.explore
         );
         window.addEventListener('resize', () => this.updateTable());
-        speedSlider.addEventListener(
-            'input',
-            ({ target }) => (this.speed = parseInt(target.value))
-        );
+        speedSlider.addEventListener('input', ({ target }) => {
+            this.speed = target.value;
+        });
         sizeSlider.addEventListener('input', ({ target }) => {
-            this.cellSize = parseInt(target.value);
+            this.cellSize = target.value;
             this.updateTable();
+        });
+        wslider.addEventListener('input', ({ target }) => {
+            this.W = parseInt(target.value / 50);
         });
         this.fade('background-color', 800);
     }
