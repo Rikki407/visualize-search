@@ -1,12 +1,12 @@
 # Visualizing Search Algorithms
-<h3>
+<p>
   
-- An interactive playground to visualize various search algorithms like `Breadth First, Depth First, Iterative Deepening, A* Search and more` 
-- A *Neumorphic User Interface* for this project and a Dark theme:tada:</h3>
+- An interactive playground to visualize various search algorithms like `Breadth First, Depth First, Iterative Deepening, Greedy, Uniform Cost, A*, IDA*` 
+- A beautiful responsive *Neumorphic User Interface* and a Dark theme:tada:</p>
 <h2><a href="https://algosearch.netlify.app/">Project Link: algosearch.netlify.app</a>
 </h2>
 
-<img alt="GIF" src="./search-demo.gif" />
+<img width="100%" src="./demo.gif"/>
 
 
 <h3>Steps to Run</h3>
@@ -50,7 +50,3 @@
 &nbsp; <a href="https://www.linkedin.com/in/rishab-lamba-647a37147/" target="_blank" rel="noopener noreferrer"><img src="https://img.icons8.com/plasticine/100/000000/linkedin.png" width="50" /></a>
 &nbsp; <a href="mailto:rshblamba@gmail.com" target="_blank" rel="noopener noreferrer"><img src="https://img.icons8.com/plasticine/100/000000/gmail.png"  width="50" /></a>
 </p>
-
-
-
-
