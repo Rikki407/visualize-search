@@ -56,5 +56,6 @@ window.addEventListener('load', () => {
                 'style',
                 `display: ${target.value === 'aStarSearch' ? 'flex' : 'none'};`
             );
+        document.getElementById('w-slider').value = 50;
     };
 });
