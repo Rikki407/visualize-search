@@ -17,7 +17,7 @@ class Board {
         this.speed = speedSlider.value;
         this.cellSize = sizeSlider.value;
         this.W = parseInt(wslider.value / 50);
-        Algorithms.call(this, this.start, this.goal, this.getNeighbors, this.W);
+        Algorithms.call(this);
         this.oldHeight = window.innerHeight;
         this.oldWidth = window.innerWidth;
         window.addEventListener('resize', () => {

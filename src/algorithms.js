@@ -1,10 +1,6 @@
 import { PriorityQueue } from './utility';
 
-function Algorithms(start, goal, getNeighbors, W) {
-    this.start = start;
-    this.goal = goal;
-    this.getNeighbors = getNeighbors;
-    this.W = W;
+function Algorithms() {
     this.explore = (cell, algo) => {
         const { td } = this.getElement(cell);
         let start, end;
