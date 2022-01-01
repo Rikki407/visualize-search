@@ -38,11 +38,16 @@ main {
 #theme {
     grid-area: theme;
 }
+#reset {
+    grid-area: reset;
+}
 #search {
     grid-area: search;
     justify-self: end;
 }
 #instructions {
+    color: var(--main-color);
+    text-align: center;
     align-self: center;
     grid-area: instructions;
     font-weight: 600;
@@ -136,17 +141,20 @@ td:hover {
         width: 85%;
     }
 }
-@media only screen and (min-width: 380px) {
+@media only screen and (max-width: 560px) {
     #action-container {
         grid-template-areas:
-            'instructions instructions instructions'
-            'toggle theme search'
-            'speed speed speed'
-            'size size size'
-            'select select select'
-            'heuristic heuristic heuristic';
-        gap: 12px;
+            'instructions instructions theme reset'
+            'toggle toggle search search'
+            'speed speed speed speed'
+            'size size size size'
+            'select select select select'
+            'heuristic heuristic heuristic heuristic';
+        gap: 20px;
         width: 85%;
+    }
+    #reset{
+        justify-self: end;
     }
     #instructions {
         justify-self: center;
@@ -163,9 +171,10 @@ td:hover {
 @media only screen and (min-width: 560px) {
     #action-container {
         grid-template-areas:
-            'toggle instructions instructions instructions theme search'
+            'toggle instructions instructions reset theme search'
             'select select select heuristic heuristic heuristic'
             'speed speed speed size size size';
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
         gap: 20px;
         width: 93%;
     }
@@ -182,21 +191,18 @@ td:hover {
 @media only screen and (min-width: 910px) {
     #action-container {
         grid-template-areas:
-            'toggle select select heuristic heuristic theme search'
-            'speed speed size size instructions instructions instructions';
+            'toggle select select select heuristic reset theme search'
+            'speed speed speed instructions instructions size size size';
         gap: 20px;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr auto 1fr;
         width: 93%;
     }
     #instructions {
-        justify-self: end;
+        justify-self: center;
     }
     #grid-container {
         width: 93%;
     }
 }
-
-
 
 /* Extra large devices (large laptops and desktops, 1200px and up)
 @media only screen and (min-width: 1200px) {
