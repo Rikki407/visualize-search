@@ -45,6 +45,7 @@ main {
 #instructions {
     align-self: center;
     grid-area: instructions;
+    font-weight: 600;
 }
 #heuristic {
     grid-area: heuristic;
