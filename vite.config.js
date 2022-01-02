@@ -23,7 +23,7 @@ export default defineConfig({
                 name: 'AlgoSearch',
                 short_name: 'AlgoSearch',
                 description: 'An interactive playground to visualize various search algorithms like Breadth First, Depth First, Iterative Deepening, Greedy, Uniform Cost, A*, IDA*',
-                theme_color: '#ffffff',
+                theme_color: '#303040',
                 icons: [
                     {
                         src: 'pwa-192x192.png',
