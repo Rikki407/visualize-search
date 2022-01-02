@@ -1,6 +1,12 @@
 import './stylesheets/style.css';
 import './stylesheets/neumorphic.css';
 import Board from './src/board';
+import { registerSW } from 'virtual:pwa-register';
+
+registerSW({
+    onNeedRefresh() {},
+    onOfflineReady() {},
+});
 
 const rootCSSKeys = [
     { key: '--main-color', light: '#fd8421', dark: '#79e3b6' },
@@ -44,7 +50,7 @@ window.addEventListener('load', () => {
         document.getElementById('w-slider')
     );
     board.makeTable();
-    
+
     document.getElementById('search').onclick = () => {
         board.breadthFirstSearch();
     };
