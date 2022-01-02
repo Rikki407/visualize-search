@@ -1,9 +1,6 @@
 import './stylesheets/style.css';
 import './stylesheets/neumorphic.css';
 import Board from './src/board';
-// import { registerSW } from 'virtual:pwa-register';
-
-// registerSW();
 
 const rootCSSKeys = [
     { key: '--main-color', light: '#fd8421', dark: '#79e3b6' },
