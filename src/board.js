@@ -188,7 +188,8 @@ class Board {
         this.sizeSlider.value = 30;
         this.cellSize = 30;
         this.wslider.value = 50;
-        this.W = 50;
+        this.W = 1;
+        this.toggle.checked = false;
         this.updateTable();
     }
 }
