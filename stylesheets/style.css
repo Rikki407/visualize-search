@@ -10,6 +10,7 @@ main {
     background: var(--l-neutral);
     color: var(--l-object);
     -webkit-tap-highlight-color: transparent;
+    touch-action: none;
 }
 
 main {
