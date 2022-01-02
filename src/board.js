@@ -54,6 +54,11 @@ class Board {
                 const j = td.getAttribute('j');
                 this.setBlock(i, j);
             }
+            for (const td of store.changed.removed) {
+                const i = td.getAttribute('i');
+                const j = td.getAttribute('j');
+                this.setBlock(i, j);
+            }
         });
         this.fade('background-color', 800);
     }
@@ -211,6 +216,7 @@ class Board {
         this.wslider.value = 50;
         this.W = 1;
         this.toggle.checked = false;
+        this.block = new Map();
         this.updateTable();
     }
 }
