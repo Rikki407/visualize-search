@@ -147,7 +147,7 @@ td:hover {
         justify-self: center;
     }
     #heuristic {
-        justify-self: stretch;
+        justify-self: center;
     }
     #grid-container {
         width: 85%;
