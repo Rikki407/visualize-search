@@ -1,7 +1,7 @@
 # Visualizing Search Algorithms
 <p>
   
-- An interactive playground to visualize various search algorithms like `Breadth First, Depth First, Iterative Deepening, Greedy, Uniform Cost, A*, IDA*` 
+- A Progressive Web App to visualize various search algorithms like `Breadth First, Depth First, Iterative Deepening, Greedy, Uniform Cost, A*, IDA*` 
 - A beautiful responsive *Neumorphic User Interface* and a Dark theme:tada:</p>
 <h2><a href="https://algosearch.netlify.app/">Project Link: algosearch.netlify.app</a>
 </h2>
