@@ -41,7 +41,7 @@ themeButton.onclick = () => {
 if (mobileAndTabletCheck()) {
     document.getElementById(
         'instructions'
-    ).innerHTML = `touch(s) <i class="fas fa-hand-pointer"></i> & drag to block path`;
+    ).innerHTML = `touch(s2) <i class="fas fa-hand-pointer"></i> & drag to block path`;
 }
 
 window.addEventListener('load', () => {
