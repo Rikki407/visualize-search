@@ -1,4 +1,5 @@
 import Algorithms from './algorithms';
+import SelectionArea from '@viselect/vanilla';
 import Cell from './cell';
 import colors from './colors';
 
@@ -40,6 +41,20 @@ class Board {
         wslider.addEventListener('input', ({ target }) => {
             this.W = parseInt(target.value / 50);
         });
+        const selection = new SelectionArea({
+            selectables: ['td'],
+            container: 'table',
+            startareas: ['#grid-container'],
+            boundaries: ['#grid-container'],
+        });
+        selection.on('stop', ({ store }) => {
+            if (store.selected.length === 1) return;
+            for (const td of store.selected) {
+                const i = td.getAttribute('i');
+                const j = td.getAttribute('j');
+                this.setBlock(i, j);
+            }
+        });
         this.fade('background-color', 800);
     }
 
@@ -52,8 +67,8 @@ class Board {
     isBlocked(row, col) {
         return this.block.get(`${row}-${col}`);
     }
-    setBlock(row, col) {
-        this.block.set(`${row}-${col}`, true);
+    setBlock(row, col, act = true) {
+        this.block.set(`${row}-${col}`, act);
         this.styleBlock(this.grid.get(`${row}-${col}`).td);
     }
     makeTable() {
@@ -68,6 +83,8 @@ class Board {
             for (let j = 0; j < this.cols; j++) {
                 const td = document.createElement('td');
                 this.styleNormal(td);
+                td.setAttribute('i', i);
+                td.setAttribute('j', j);
                 td.addEventListener('click', () => this.onClick(i, j));
                 td.addEventListener('mousemove', (e) => {
                     if (e.shiftKey) this.setBlock(i, j);
@@ -126,7 +143,11 @@ class Board {
     }
 
     onClick(row, col, action = !this.toggle.checked ? 'start' : 'goal') {
-        if (this[action]) this.styleNormal(this.getElement(this[action]).td);
+        if (this.isBlocked(row, col)) return;
+        if (this[action]) {
+            this.styleNormal(this.getElement(this[action]).td);
+            this.setBlock(row, col, false);
+        }
         this[action] = new Cell(row, col);
         const { td } = this.getElement(this[action]);
         action === 'start' ? this.styleStart(td) : this.styleGoal(td);

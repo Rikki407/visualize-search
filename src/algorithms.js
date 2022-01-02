@@ -111,6 +111,7 @@ function Algorithms() {
         const reached = new Map([[this.start.repr, this.start]]);
         while (!frontier.isEmpty()) {
             const curr = frontier.pop();
+            console.log('goal', curr.isEqual(this.goal));
             if (curr.isEqual(this.goal)) return this.drawPath(curr);
             if (!curr.isEqual(this.start)) await this.explore(curr, 'a*');
             for (const neighbor of this.getNeighbors(curr)) {

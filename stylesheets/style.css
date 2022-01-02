@@ -19,6 +19,13 @@ main {
     align-items: center;
 }
 
+.selection-area {
+    background: rgba(46, 115, 252, 0.11);
+    border: 2px solid rgba(98, 155, 255, 0.81);
+    border-radius: 0.1em;
+}
+
+
 #action-container {
     margin: 16px 0;
     display: grid;
@@ -54,7 +61,7 @@ main {
     text-align: center;
     align-self: center;
     grid-area: instructions;
-    font-weight: 600;
+    font-weight: 100;
 }
 #heuristic {
     grid-area: heuristic;
@@ -70,6 +77,7 @@ main {
     border-radius: 12px;
     width: 95%;
     padding: 8px;
+    user-select: none;
     margin-bottom: 28px;
     box-shadow: inset 4px 4px 16px -7px var(--l-light),
         inset -7px -7px 9px -6px var(--l-shadow),
@@ -79,6 +87,7 @@ main {
 table {
     border-collapse: collapse;
     border-radius: 12px;
+    user-select: none;
 }
 
 td {
@@ -87,6 +96,7 @@ td {
     -moz-transition: background-color 0.3s ease-out;
     -o-transition: background-color 0.3s ease-out;
     transition: background-color 0.3s ease-outne;
+    user-select: none;
 }
 
 table td:first-child {
