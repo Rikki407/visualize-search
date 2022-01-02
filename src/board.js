@@ -106,6 +106,7 @@ class Board {
     updateTable() {
         if (this.parent.contains(this.table)) {
             this.parent.removeChild(this.table);
+            this.block = new Map();
             this.makeTable();
         }
     }
@@ -216,7 +217,6 @@ class Board {
         this.wslider.value = 50;
         this.W = 1;
         this.toggle.checked = false;
-        this.block = new Map();
         this.updateTable();
     }
 }
