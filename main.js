@@ -1,6 +1,7 @@
 import './stylesheets/style.css';
 import './stylesheets/neumorphic.css';
 import Board from './src/board';
+import { mobileAndTabletCheck } from './src/utility';
 
 const rootCSSKeys = [
     { key: '--main-color', light: '#fd8421', dark: '#79e3b6' },
@@ -34,6 +35,12 @@ themeButton.onclick = () => {
         )
     );
 };
+
+if (mobileAndTabletCheck()) {
+    document.getElementById(
+        'instructions'
+    ).innerHTML = `touch <i class="fas fa-hand-pointer"></i> & drag to block path`;
+}
 
 window.addEventListener('load', () => {
     const board = new Board(
