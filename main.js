@@ -24,7 +24,7 @@ const rootCSSKeys = [
     { key: '--l-object', light: '#8f8fb5', dark: '#9d9da7' },
 ];
 
-let lightTheme = false;
+let lightTheme = true;
 const themeButton = document.getElementById('theme');
 themeButton.onclick = () => {
     lightTheme = !lightTheme;

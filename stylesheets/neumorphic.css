@@ -1,6 +1,6 @@
 :root {
     /*--light Theme--*/
-    /* --main-color: #fd8421;
+    --main-color: #fd8421;
     --main-color-light: #f39b53;
     --main-color-shadow: #d16a15;
     --accent-color: #fd8421;
@@ -14,10 +14,10 @@
     --l-neutral: #dedeed;
     --l-light: #f1f1f7;
     --l-shadow: #aaa4c4;
-    --l-object: #8f8fb5; */
+    --l-object: #8f8fb5;
 
     /*--Dark Theme--*/
-
+/* 
     --main-color: #79e3b6;
     --main-color-light: #a8f7d6;
     --main-color-shadow: #5cb891;
@@ -31,7 +31,7 @@
 	--l-neutral: #303040;
 	--l-light: #424255;
 	--l-shadow: #151322;
-	--l-object: #9d9da7;
+	--l-object: #9d9da7; */
 }
 
 .container {
