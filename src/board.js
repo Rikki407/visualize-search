@@ -48,7 +48,7 @@ class Board {
             boundaries: ['#grid-container'],
         });
         selection.on('stop', ({ store }) => {
-            if (store.selected.length === 1) return;
+            if (store.selected.length <= 1) return;
             for (const td of store.selected) {
                 const i = td.getAttribute('i');
                 const j = td.getAttribute('j');
