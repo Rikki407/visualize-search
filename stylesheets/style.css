@@ -147,7 +147,13 @@ td:hover {
         justify-self: center;
     }
     #heuristic {
-        justify-self: center;
+        justify-self: stretch;
+    }
+    #heuristic>.label-text {
+        margin-right: 0;
+    }
+    #heuristic>.neu-input-container{
+        margin-left: 12px;
     }
     #grid-container {
         width: 85%;
