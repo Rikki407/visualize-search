@@ -20,9 +20,9 @@ export default defineConfig({
                 'apple-touch-icon.png',
             ],
             manifest: {
-                name: 'Name of your app',
-                short_name: 'Short name of your app',
-                description: 'Description of your app',
+                name: 'AlgoSearch',
+                short_name: 'AlgoSearch',
+                description: 'An interactive playground to visualize various search algorithms like Breadth First, Depth First, Iterative Deepening, Greedy, Uniform Cost, A*, IDA*',
                 theme_color: '#ffffff',
                 icons: [
                     {
