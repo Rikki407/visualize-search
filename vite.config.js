@@ -13,6 +13,7 @@ export default defineConfig({
             },
         }),
         VitePWA({
+            registerType: 'autoUpdate',
             includeAssets: [
                 'favicon.svg',
                 'favicon.ico',
@@ -22,7 +23,8 @@ export default defineConfig({
             manifest: {
                 name: 'AlgoSearch',
                 short_name: 'AlgoSearch',
-                description: 'An interactive playground to visualize various search algorithms like Breadth First, Depth First, Iterative Deepening, Greedy, Uniform Cost, A*, IDA*',
+                description:
+                    'An interactive playground to visualize various search algorithms like Breadth First, Depth First, Iterative Deepening, Greedy, Uniform Cost, A*, IDA*',
                 theme_color: '#303040',
                 icons: [
                     {
