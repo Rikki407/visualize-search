@@ -67,7 +67,6 @@ main {
     grid-area: heuristic;
     justify-self: end;
     font-size: 1.2em;
-    font-weight: 100;
 }
 #grid-container {
     background: var(--l-neutral);
