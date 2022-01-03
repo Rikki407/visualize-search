@@ -3,7 +3,6 @@ import './stylesheets/neumorphic.css';
 import Board from './src/board';
 import { mobileAndTabletCheck } from './src/utility';
 import { registerSW } from 'virtual:pwa-register';
-import './assetlinks.json';
 registerSW();
 
 const rootCSSKeys = [
