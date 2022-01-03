@@ -21,11 +21,12 @@ export default defineConfig({
                 'apple-touch-icon.png',
             ],
             manifest: {
-                name: 'AlgoSearch',
-                short_name: 'AlgoSearch',
+                name: 'Algo Search',
+                short_name: 'Algo Search',
                 description:
                     'An interactive playground to visualize various search algorithms like Breadth First, Depth First, Iterative Deepening, Greedy, Uniform Cost, A*, IDA*',
                 theme_color: '#303040',
+                "background_color": "#303040",
                 icons: [
                     {
                         src: 'pwa-192x192.png',
