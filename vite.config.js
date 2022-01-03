@@ -23,6 +23,8 @@ export default defineConfig({
             manifest: {
                 name: 'Algo Search',
                 short_name: 'Algo Search',
+                "start_url": "/",
+                "scope": "/",
                 description:
                     'An interactive playground to visualize various search algorithms like Breadth First, Depth First, Iterative Deepening, Greedy, Uniform Cost, A*, IDA*',
                 theme_color: '#303040',

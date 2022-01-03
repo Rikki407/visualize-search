@@ -1,0 +1,29 @@
+{
+    "name": "Algo Search",
+    "short_name": "Algo Search",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#303040",
+    "lang": "en",
+    "scope": "https://epic-einstein-6e5c03.netlify.app/",
+    "description": "An interactive playground to visualize various search algorithms like Breadth First, Depth First, Iterative Deepening, Greedy, Uniform Cost, A*, IDA*",
+    "theme_color": "#303040",
+    "icons": [
+        {
+            "src": "pwa-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "pwa-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "pwa-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
