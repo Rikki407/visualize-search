@@ -3,3 +3,9 @@ node_modules
 dist
 dist-ssr
 *.local
+*.keystore
+app
+*.aab
+*.apk
+*.idsig
+*gradle*
